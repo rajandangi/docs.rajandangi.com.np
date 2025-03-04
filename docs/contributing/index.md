@@ -1,5 +1,5 @@
 ---
-title: Contributing to Khalti Docs
+title: Contributing to docs.rajandangi
 ---
 
 ## Introduction
@@ -9,7 +9,7 @@ please feel free to create an issue.
 
 ### Key information
 
-* The documentation source files are inside `content/` directory.
+* The documentation source files are inside `docs/` directory.
 * The source files are written in `Markdown`.
 * The HTML documentation site is built using [mkdocs](http://www.mkdocs.org),
   a Python package to build documentation.
@@ -19,13 +19,13 @@ please feel free to create an issue.
 
 ### Fork it, clone it
 
-Fork the [docs repo](https://github.com/khalti/khalti-docs-official-repo) by using the
+Fork the [docs repo](https://github.com/rajandangi/docs.rajandangi.com.np) by using the
 Github interface.
 
 Clone that fork into your development machine.
 
 ```bash
-git clone git@github.com:<YOUR_USERNAME>/khalti-docs-official-repo.git
+git clone git@github.com:<YOUR_USERNAME>/docs.rajandangi.com.np.git
 ```
 
 ### Locally building and serving
@@ -54,13 +54,13 @@ live reload the page when you make changes in the source files.
 Once you've made necessary changes, push it to your forked repository by running:
 
 ```bash
-git push origin master
+git push origin main
 ```
 
 After you've done this, you need to ask us to merge your changes to the main repo.
 Github provides pull request feature to accomplish that.
 
-Go to the [pull requests](https://github.com/khalti/khalti-docs-official-repo/pulls)
+Go to the [pull requests](https://github.com/rajandangi/docs.rajandangi.com.np/pulls)
 tab of the main repo.
 
 You'll notice a big green, **New pull request** button on the top right side of the
