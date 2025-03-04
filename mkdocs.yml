@@ -8,58 +8,57 @@ site_description: >-
 theme:
   name: material
   features:
-      - announce.dismiss
-      - content.action.edit
-      - content.action.view
-      - content.code.annotate
-      - content.code.copy
-      # - content.code.select
-      # - content.footnote.tooltips
-      # - content.tabs.link
-      - content.tooltips
-      # - header.autohide
-      # - navigation.expand
-      - navigation.footer
-      - navigation.indexes
-      # - navigation.instant
-      # - navigation.instant.prefetch
-      # - navigation.instant.progress
-      # - navigation.prune
-      - navigation.sections
-      - navigation.tabs
-      # - navigation.tabs.sticky
-      - navigation.top
-      - navigation.tracking
-      - search.highlight
-      - search.share
-      - search.suggest
-      - toc.follow
-      # - toc.integrateÏ
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrateÏ
   palette:
-        - media: "(prefers-color-scheme)"
-          toggle:
-            icon: material/brightness-4
-            name: Switch to light mode
-        - media: "(prefers-color-scheme: light)"
-          scheme: default
-          primary: indigo
-          accent: indigo
-          toggle:
-            icon: material/toggle-switch
-            name: Switch to dark mode
-        - media: "(prefers-color-scheme: dark)"
-          scheme: slate
-          primary: black
-          accent: indigo
-          toggle:
-            icon: material/toggle-switch-off
-            name: Switch to system preference
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
   font:
-      text: Roboto
-      code: Roboto Mono
-  favicon: assets/favicon.png
-  icon:
-      logo: logo
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.svg
+  logo: assets/logo.svg
 
 # Repository
 repo_name: squidfunk/mkdocs-material
@@ -71,35 +70,31 @@ copyright: "Copyright &copy; 2025 Rajan Dangi"
 # Page tree
 nav:
   - Home: index.md
-  - Getting started:
-      - Installation: getting-started.md
-      - Creating your site: creating-your-site.md
-      - Publishing your site: publishing-your-site.md
-      - Customization: customization.md
-      - Conventions: conventions.md
-      - Browser support: browser-support.md
-      - Enterprise feedback: enterprise-support.md
-      - Philosophy: philosophy.md
-      - Alternatives: alternatives.md
-      - License: license.md
-      - Tutorials:
-          - tutorials/index.md
-          - "Blogs":
-              - tutorials/blogs/basic.md
-              - tutorials/blogs/navigation.md
-              - tutorials/blogs/engage.md
-          - "Social cards":
-              - tutorials/social/basic.md
-              - tutorials/social/custom.md
-      - Changelog:
-          - changelog/index.md
-          - How to upgrade: upgrade.md
+  - React:
+      - react/index.md
+      - Inception: react/getting-started.md
+  # - Getting started:
+  #     - Installation: getting-started.md
+  # - Creating your site: creating-your-site.md
+  # - Publishing your site: publishing-your-site.md
+  # - Customization: customization.md
+  # - Conventions: conventions.md
+  # - Browser support: browser-support.md
+  # - Enterprise feedback: enterprise-support.md
+  # - Philosophy: philosophy.md
+  # - Alternatives: alternatives.md
+  # - License: license.md
+  # - Tutorials:
+  #     - tutorials/index.md
+  #     - "Blogs":
+  #         - tutorials/blogs/basic.md
+  #         - tutorials/blogs/navigation.md
+  #         - tutorials/blogs/engage.md
+  #     - "Social cards":
+  #         - tutorials/social/basic.md
+  #         - tutorials/social/custom.md
   - Community:
       - Contributing:
           - contributing/index.md
           - Reporting a bug: contributing/reporting-a-bug.md
           - Reporting a docs issue: contributing/reporting-a-docs-issue.md
-          - Requesting a change: contributing/requesting-a-change.md
-          - Adding translations: contributing/adding-translations.md
-          - Making a pull request: contributing/making-a-pull-request.md
-
