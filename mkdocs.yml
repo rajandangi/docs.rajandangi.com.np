@@ -13,7 +13,7 @@ theme:
     - content.action.view
     - content.code.annotate
     - content.code.copy
-    # - content.code.select
+    - content.code.select
     # - content.footnote.tooltips
     # - content.tabs.link
     - content.tooltips
@@ -59,6 +59,55 @@ theme:
     code: Roboto Mono
   favicon: assets/favicon.svg
   logo: assets/logo.svg
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - abbr
+  - attr_list
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+watch:
+  - includes
+
+plugins:
+  - search
+  - blog:
+      post_url_format: "{categories}/{slug}"
+      post_date_format: long
 
 # Repository
 repo_name: squidfunk/mkdocs-material
@@ -72,27 +121,26 @@ nav:
   - Home: index.md
   - React:
       - react/index.md
-      - Inception: react/getting-started.md
-  # - Getting started:
-  #     - Installation: getting-started.md
-  # - Creating your site: creating-your-site.md
-  # - Publishing your site: publishing-your-site.md
-  # - Customization: customization.md
-  # - Conventions: conventions.md
-  # - Browser support: browser-support.md
-  # - Enterprise feedback: enterprise-support.md
-  # - Philosophy: philosophy.md
-  # - Alternatives: alternatives.md
-  # - License: license.md
-  # - Tutorials:
-  #     - tutorials/index.md
-  #     - "Blogs":
-  #         - tutorials/blogs/basic.md
-  #         - tutorials/blogs/navigation.md
-  #         - tutorials/blogs/engage.md
-  #     - "Social cards":
-  #         - tutorials/social/basic.md
-  #         - tutorials/social/custom.md
+      - Inception: react/inception.md
+      - Igniting our app: react/ignition.md
+      - Laying the foundation: react/laying-the-foundation.md
+      - Talk is cheap, show me the code: react/talk-is-cheap-show-me-the-code.md
+      - Let's Get Hooked: react/lets-get-hooked.md
+      - Exploring the World: react/exploring-the-world.md
+      - Finding the Path: react/finding-the-path.md
+      - Let's Get Classy: react/lets-get-classy.md
+      - Optimizing our app: react/optimizing-our-app.md
+      - Show it to the world: react/show-it-to-the-world.md
+      - Data is the new oil: react/data-is-the-new-oil.md
+      - Let's Build Our Store: react/lets-build-our-store.md
+      - Time for Test: react/time-for-test.md
+      - useRef Hook: react/useRef-hook.md
+  - Reference:
+      - reference/index.md
+  # - Blog:
+  #     - blog/index.md
+  #     - Test: blog/posts/09.md
+
   - Community:
       - Contributing:
           - contributing/index.md

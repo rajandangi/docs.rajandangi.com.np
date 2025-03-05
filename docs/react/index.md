@@ -1,5 +1,6 @@
 ---
 title: Learn React
+icon: material/react
 ---
 
 ## Introduction
@@ -8,5 +9,7 @@ In this documentation, we will learn about React, a JavaScript library for build
 ## Prerequisites
 Before starting with React, you should have a basic understanding of HTML, CSS, and JavaScript. You should also have Node.js installed on your machine to create a React application.
 
-## Official Documentation
-You can refer to the [official React documentation](https://react.dev/learn) for more information.
+
+!!! note "Official Documentation"
+
+    You can refer to the [official React documentation](https://react.dev/learn) for more information.
