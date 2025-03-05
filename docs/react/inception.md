@@ -1,4 +1,7 @@
-# 01 - Inception
+---
+icon: material/arrow-right
+---
+# 01 - React Inception
 
 ## What is a CDN ?
 - A Content Delivery Network or Content Distribution Network
@@ -48,7 +51,7 @@ pay their content to their end users.
 In simple terms: React defines *what* to render, while React-DOM handles *how* to render it in the browser.
 
 ## First program in React
-```
+```jsx
 const heading = React.createElement('div', { id: "parent" }, "Hello from React");
 
 const root= React.createRoot(document.getElementById('root'));
@@ -61,7 +64,7 @@ root.render(heading)
 - The `render()` function is responsible for taking the JavaScript object (React element) as an argument, converting it into an HTML tag and putting it in the DOM.
 
 ## Create nested elements (with sibling elements)
-```
+```jsx
 const heading = React.createElement('div', { id: "parent" },
     React.createElement("div", { id: "child" },
         [
@@ -176,3 +179,4 @@ React follows a process called **reconciliation** to sync changes, which happens
    - During asynchronous operations
 
 This process ensures efficient updates by minimizing direct manipulation of the Real DOM.
+
