@@ -137,9 +137,9 @@ nav:
       - useRef Hook: react/useRef-hook.md
   - Reference:
       - reference/index.md
-  # - Blog:
-  #     - blog/index.md
-  #     - Test: blog/posts/09.md
+  - Blog:
+      - blog/index.md
+      - Download protected pdf from google drive: blog/posts/download-protected-pdf-from-google-drive.md
 
   - Community:
       - Contributing:
