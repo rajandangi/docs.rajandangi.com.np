@@ -1,5 +1,6 @@
 ---
 title: Contributing to docs.rajandangi
+icon: material/hand-coin
 ---
 
 ## Introduction
