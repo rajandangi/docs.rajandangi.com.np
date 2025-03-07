@@ -11,6 +11,9 @@ categories:
 ---
 # Download protected pdf from google drive :material-google-drive:
 
+!!! warning
+    This is just for educational purposes. Please respect the copyright and terms of service of the content you are downloading.
+    
 ## A Step-by-Step Guide to Downloading Protected PDFs from Google Drive in High Quality
 
 - [x] Open the document in Google Drive
@@ -112,3 +115,6 @@ jspdf.onload = function () {
 jspdf.src = trustedURL;
 document.body.appendChild(jspdf);
 ```
+
+This code will download a PDF with high-quality images from the current Google Drive document. You can adjust the image quality by changing the `toDataURL` parameters. The resulting PDF will be saved as `high_quality_download.pdf`.
+
