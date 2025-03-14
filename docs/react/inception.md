@@ -40,15 +40,14 @@ pay their content to their end users.
 
 ## Difference between React and React-DOM
 
-#### React
-- A JavaScript library for building user interfaces
-- Contains core functionality and component logic
+| React                 | React-DOM                   |
+| :-----------------    | :-------------------------- |
+| A JavaScript library for building user interfaces | A package that connects React to the browser's DOM  |
+| Contains core functionality and component logic | Handles rendering React components in web browsers |
 
-#### React-DOM
-- A package that connects React to the browser's DOM
-- Handles rendering React components in web browsers
 
-In simple terms: React defines *what* to render, while React-DOM handles *how* to render it in the browser.
+!!! tip
+    React defines *what* to render, while React-DOM handles *how* to render it in the browser.
 
 ## First program in React
 ```jsx
