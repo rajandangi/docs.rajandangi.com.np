@@ -4,9 +4,9 @@ icon: material/arrow-right
 
 # 10 - Jo Dikhta Hai, Vo Bikta Hai
 
-## 🎨 Exploring Ways to Style React Components with CSS
+## Exploring Ways to Style React Components with CSS
 
-### 1. Inline CSS 🖊️
+### 1. Inline CSS :pencil2:
 Apply styles directly to elements using the `style` attribute.
 
 ```jsx
@@ -19,15 +19,15 @@ function Button() {
 }
 ```
 
-**Pros:**
-- Quick and easy for simple styles
-- Scoped to the specific element
+!!! success "Pros"
+    - Quick and easy for simple styles
+    - Scoped to the specific element
 
-**Cons:**
-- Limited CSS features
-- Harder to maintain for larger projects
+!!! warning "Cons"
+    - Limited CSS features
+    - Harder to maintain for larger projects
 
-### 2. Importing External Stylesheet 📄
+### 2. Importing External Stylesheet :pencil:
 Use separate `.css` files and import them into your React components.
 
 ```css
@@ -46,14 +46,14 @@ function Button() {
 }
 ```
 
-**Pros:**
-- Cleaner separation of concerns
-- Full access to CSS features
+!!! success "Pros"
+    - Cleaner separation of concerns
+    - Full access to CSS features
 
-**Cons:**
-- Global scope can lead to naming conflicts
+!!! warning "Cons"
+    - Global scope can lead to naming conflicts
 
-### 3. CSS Modules 🔗
+### 3. CSS Modules :octicons-link-16:
 Scope CSS to specific components by using modular CSS files.
 
 ```css
@@ -72,14 +72,14 @@ function Button() {
 }
 ```
 
-**Pros:**
-- Avoids naming conflicts
-- Maintains scope within components
+!!! success "Pros"
+    - Avoids naming conflicts
+    - Maintains scope within components
 
-**Cons:**
-- Requires configuration in the build process
+!!! warning "Cons"
+    - Requires configuration in the build process
 
-## 4. Styled Components 💅
+## 4. Styled Components :nail_care:
 Use a CSS-in-JS library to style components with tagged template literals.
 
 ```jsx
@@ -95,15 +95,15 @@ function App() {
 }
 ```
 
-**Pros:**
-- Scoped styles with dynamic props
-- Enhanced styling capabilities
+!!! success "Pros"
+    - Scoped styles with dynamic props
+    - Enhanced styling capabilities
 
-**Cons:**
-- Adds extra library dependency
-- May increase bundle size
+!!! warning "Cons"
+    - Adds extra library dependency
+    - May increase bundle size
 
-## Conditional Styling in React ⚖️
+## Conditional Styling in React :material-scale-balance:
 Apply styles based on component state or props.
 
 #### Using Inline Styles
@@ -148,10 +148,6 @@ function App() {
 
 !!! tip
     - Choose the method that best fits your project size and complexity.
-
-!!! tip
     - For larger projects, CSS Modules or Styled Components can help maintain organized and scalable styles.
-
-!!! tip
     - Conditional styling enhances interactivity and user experience by dynamically changing styles based on state or props.
 
