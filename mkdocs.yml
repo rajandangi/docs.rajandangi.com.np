@@ -135,6 +135,10 @@ nav:
       - Let's Build Our Store: react/lets-build-our-store.md
       - Time for Test: react/time-for-test.md
       - useRef Hook: react/useRef-hook.md
+  - PHP: 
+    - php/index.md
+    - Dependency Injection (DI): php/dependency-injection.md
+    - Inversion of Control (IoC): php/inversion-of-control.md
   - Blog:
       - blog/index.md
       - Download protected pdf from google drive: blog/posts/download-protected-pdf-from-google-drive.md
