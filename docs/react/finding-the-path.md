@@ -33,22 +33,22 @@ SPA (Single Page Application) is a web application that interacts with users by 
 ### Key characteristics of SPAs:
 
 1. **Dynamic Updates**
-   - Content updates without full page reloads using JavaScript and client-side routing
+    - Content updates without full page reloads using JavaScript and client-side routing 
 
 2. **Smooth User Experience**
-   - More responsive as only parts of the page update without full refreshes
+    - More responsive as only parts of the page update without full refreshes
 
 3. **Initial Load**
-   - May take longer initially but provides faster subsequent interactions
+    - May take longer initially but provides faster subsequent interactions
 
 4. **Client-Side Routing**
-   - Uses libraries like React Router to simulate traditional navigation
+    - Uses libraries like React Router to simulate traditional navigation
 
 5. **API-Centric**
-   - Communicates with backend APIs to fetch and send data, typically in JSON format
+    - Communicates with backend APIs to fetch and send data, typically in JSON format
 
 6. **State Management**
-   - Often uses libraries like Redux or Vuex to manage application state
+    - Often uses libraries like Redux or Vuex to manage application state
 
 Common frameworks for building SPAs include React, Angular, and Vue.js, which provide tools for creating efficient and maintainable applications.
 
@@ -58,58 +58,58 @@ Common frameworks for building SPAs include React, Angular, and Vue.js, which pr
 
 #### Key Features:
 1. **Browser-Side Handling**
-   - Routes managed in the browser
-   - Uses frameworks like React Router or Vue Router
-   - No server requests for page changes
+    - Routes managed in the browser
+    - Uses frameworks like React Router or Vue Router
+    - No server requests for page changes
 
 2. **Performance**
-   - Faster page transitions
-   - No full page reloads
-   - Dynamic DOM updates
+    - Faster page transitions
+    - No full page reloads
+    - Dynamic DOM updates
 
 3. **Architecture**
-   - Typical in Single Page Applications (SPAs)
-   - Initial HTML load followed by dynamic content updates
-   - JavaScript-dependent
+    - Typical in Single Page Applications (SPAs)
+    - Initial HTML load followed by dynamic content updates
+    - JavaScript-dependent
 
 4. **Limitations**
-   - SEO challenges
-   - Requires additional setup for search engine optimization
-   - May need server-side rendering (SSR) solutions
+    - SEO challenges
+    - Requires additional setup for search engine optimization
+    - May need server-side rendering (SSR) solutions
 
 ### Server-Side Routing
 
 #### Key Features:
 1. **Server-Side Handling**
-   - Routes managed on server
-   - Server generates new HTML for each route
-   - Traditional web architecture
+    - Routes managed on server
+    - Server generates new HTML for each route
+    - Traditional web architecture
 
 2. **Performance**
-   - Slower page transitions
-   - Full page reloads required
-   - Higher server load
+    - Slower page transitions
+    - Full page reloads required
+    - Higher server load
 
 3. **Architecture**
-   - Used in traditional multi-page websites
-   - Each route serves a complete HTML page
-   - Less JavaScript dependency
+    - Used in traditional multi-page websites
+    - Each route serves a complete HTML page
+    - Less JavaScript dependency
 
 4. **Advantages**
-   - Better SEO by default
-   - Simpler implementation
-   - Better for content-focused websites
+    - Better SEO by default
+    - Simpler implementation
+    - Better for content-focused websites
 
 ### Best Use Cases
 - **Choose Client-Side Routing for:**
-  - Interactive applications
-  - Dynamic content
-  - Fast user experience requirements
+    - Interactive applications
+    - Dynamic content
+    - Fast user experience requirements
 
 - **Choose Server-Side Routing for:**
-  - Content-heavy websites
-  - SEO priority
-  - Traditional web applications
+    - Content-heavy websites
+    - SEO priority
+    - Traditional web applications
 
 Some applications use a hybrid approach, combining both methods to leverage their respective advantages.
 
@@ -146,6 +146,7 @@ const appRouter = createBrowserRouter([
 ]);
 ```
 **Note:**
+
 - `createBrowserRouter` creates the routing configuration
 - Configuration defines what happens on specific routes
 - `errorElement` handles undefined routes
@@ -156,6 +157,7 @@ const appRouter = createBrowserRouter([
 root.render(<RouterProvider router={appRouter} />);
 ```
 **Note:**
+
 - `RouterProvider` is necessary to provide routing configuration to the app
 - Without `RouterProvider`, routes won't work
 
@@ -173,6 +175,7 @@ const AppLayout = () => {
 };
 ```
 **Note:**
+
 - `Outlet` is a placeholder where child routes are rendered
 - It automatically updates when route changes
 - Essential for nested routing
@@ -190,6 +193,7 @@ const ErrorPage = () => {
 };
 ```
 **Note:**
+
 - `useRouteError` hook provides detailed error information
 - Useful for custom error pages
 - Helps in debugging routing issues
@@ -204,6 +208,7 @@ const ErrorPage = () => {
 }
 ```
 **Note:**
+
 - `:resId` is a URL parameter
 - Can have multiple dynamic parameters
 - Makes routes flexible and reusable
@@ -216,6 +221,7 @@ const RestaurantMenu = () => {
 };
 ```
 **Note:**
+
 - `useParams` hook extracts URL parameters
 - Parameters are accessible as object properties
 - Useful for fetching specific data based on URL
@@ -231,6 +237,7 @@ const RestaurantMenu = () => {
 <a href="/about">About</a>
 ```
 **Note:**
+
 - Always use `Link` from react-router-dom for internal navigation
 - `<a>` tags cause full page reloads, breaking SPA behavior
 - `Link` maintains the single-page application experience

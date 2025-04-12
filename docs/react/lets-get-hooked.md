@@ -93,6 +93,7 @@ Rendering is the phase where React updates the real DOM based on the results of 
 The diff algorithm is a crucial part of the reconciliation process. It identifies the differences between the updated virtual DOM and the previous virtual DOM, allowing React to update only what has changed.
 
 **Benefits:**
+
 - **Optimized Rendering:** By updating only the necessary parts of the DOM, React minimizes performance overhead.
 - **Predictable Updates:** The diffing process ensures that changes are applied consistently and accurately.
 
@@ -126,6 +127,7 @@ To understand React's efficiency, it's essential to grasp the interplay between 
 4. **React Fiber:** Fiber enhances this entire process by introducing incremental rendering and improved scheduling, ensuring that updates are handled smoothly without compromising the application's responsiveness.
 
 **Flow Summary:**
+
 - **State Change:** Triggers an update in the virtual DOM.
 - **Reconciliation:** Compares new and old virtual DOMs to find differences.
 - **Rendering:** Updates the real DOM based on these differences.
