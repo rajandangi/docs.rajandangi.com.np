@@ -34,10 +34,9 @@ export default User;
 - `super()` is a reference to the parent class constructor (`React.Component`).
 - If we want to use `this.props` or `this` keyword inside the constructor, we need to pass props to `super()`.
 
-**Note:**
-
-- Loading a functional component means invoking/mounting that function.
-- Loading a class-based component means creating an instance of the class.
+!!! note 
+    - Loading a functional component means invoking/mounting that function.
+    - Loading a class-based component means creating an instance of the class.
 
 ## Creating State Variables in Class-Based Components
 
@@ -124,17 +123,17 @@ class User extends React.Component {
 export default User;
 ```
 
-**Important Notes:**
-- When updating state, React will only modify the specified state variables and preserve others.
-- Loading a component means mounting it on a web page.
-- When a class-based component loads, the constructor is called first, followed by the render() method.
+!!! note "Important Notes"
+    - When updating state, React will only modify the specified state variables and preserve others.
+    - Loading a component means mounting it on a web page.
+    - When a class-based component loads, the constructor is called first, followed by the render() method.
 
 ## React Lifecycle Methods
 
 ![React Lifecycle Methods](assets/react-lifecycle-methods-diagram.png)
 
 ### Basic Component Structure
-```jsx
+```jsx linenums="1"
 import React from 'react';
 
 class App extends React.Component {
@@ -410,7 +409,7 @@ The `componentWillUnmount` lifecycle method in React class-based components is u
 
 #### Example:
 
-```jsx
+```jsx linenums="1" hl_lines="12-15"
 class MyComponent extends React.Component {
   constructor() {
     super();
