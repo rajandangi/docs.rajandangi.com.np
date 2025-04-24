@@ -97,6 +97,11 @@ markdown_extensions:
       custom_checkbox: true
   - abbr
   - attr_list
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md
@@ -133,6 +138,9 @@ nav:
       - undefined vs not defined: javascript/undefined-vs-not-defined.md
       - javascript/loosely-typed-language.md
       - javascript/scope-chain-scope-lexical-environment.md
+      - javascript/let-const-and-Temporal-Dead-Zone.md
+      - javascript/block-scope-function-scope-shadowing.md
+      - javascript/closures.md
   - React:
       - react/index.md
       - Inception: react/inception.md
