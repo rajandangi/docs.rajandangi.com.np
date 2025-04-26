@@ -159,4 +159,13 @@ Here's how the call stack manages execution:
         - Runtime Stack
         - Machine Stack
 
+
+---
+### Further Reading
+
+Please refer to the :octicons-link-external-16: [Asynchronous JavaScript & Event Loop](./async-js-and-event-loop.md) for more details on how the call stack interacts with asynchronous operations.
+
+---
+
+
 > @AkshaySaini’s: Namaste JavaScript Tutorial was the main source of inspiration.

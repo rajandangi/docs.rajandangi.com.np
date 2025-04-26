@@ -145,6 +145,7 @@ nav:
       - javascript/closure-interview-questions.md
       - javascript/first-class-functions.md
       - javascript/callback-functions.md
+      - javascript/async-js-and-event-loop.md
   - React:
       - react/index.md
       - Inception: react/inception.md
