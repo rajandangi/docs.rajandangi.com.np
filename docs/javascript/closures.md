@@ -10,6 +10,12 @@ Have you ever wondered what happens to a function's local variables after the fu
 
 ==}
 
+---
+
+:octicons-link-external-16: [Goto Scope Chain, Scope and Lexical Environment](scope-chain-scope-lexical-environment.md#what-is-a-closure)
+
+---
+
 Let's start by understanding the foundation: **Lexical Scoping**.
 
 Consider this simple example:

@@ -141,6 +141,10 @@ nav:
       - javascript/let-const-and-Temporal-Dead-Zone.md
       - javascript/block-scope-function-scope-shadowing.md
       - javascript/closures.md
+      - javascript/setTimeout-and-closures.md
+      - javascript/closure-interview-questions.md
+      - javascript/first-class-functions.md
+      - javascript/callback-functions.md
   - React:
       - react/index.md
       - Inception: react/inception.md

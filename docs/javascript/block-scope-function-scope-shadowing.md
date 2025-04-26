@@ -331,3 +331,4 @@ Inside Block 1, a =  30                     shadowing-1.js:4
 Inside Block 2, a =  30                     shadowing-1.js:7
 Outside Block, a =  20                      shadowing-1.js:10
 ```
+
