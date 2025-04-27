@@ -87,7 +87,7 @@ Here's an explanation of how the JavaScript code is executed:
 ### 4️⃣ End of Script
 After all lines are executed, the Global Execution Context is deleted.
 
-## 📝 Final Output
+## :material-wallpaper: Final Output
 
 After the code runs:
 
@@ -101,13 +101,13 @@ After the code runs:
     - For a more detailed explanation, check out the video by Akshay Saini
     - [YouTube - Namaste JavaScript](https://youtu.be/iLWTnMzWtj4?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP)
 
-# 🗂️ Call Stack in JavaScript
+## :file_folder: Call Stack in JavaScript
 
 The **call stack** is a fundamental mechanism in JavaScript that manages the creation, deletion, and control of execution contexts during code execution.
 
 The call stack works just like a physical stack—**last in, first out (LIFO)**. At the bottom of the stack is the **Global Execution Context (GEC)**. Whenever a JavaScript program runs, the GEC is created and pushed onto the call stack.
 
-## 🔄 Step-by-Step Example
+### :material-filter: Step-by-Step Example
 
 ```javascript linenums="1"
 var n = 2;
@@ -161,11 +161,6 @@ Here's how the call stack manages execution:
 
 
 ---
-### Further Reading
+## Further Reading
 
 Please refer to the :octicons-link-external-16: [Asynchronous JavaScript & Event Loop](./async-js-and-event-loop.md) for more details on how the call stack interacts with asynchronous operations.
-
----
-
-
-> @AkshaySaini’s: Namaste JavaScript Tutorial was the main source of inspiration.

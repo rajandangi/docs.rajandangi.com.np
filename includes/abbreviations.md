@@ -26,3 +26,4 @@
 *[GA]: Google Analytics
 *[GA4]: Google Analytics 4
 *[GEC]: Global Execution Context
+*[JRE]: JavaScript Runtime Environment

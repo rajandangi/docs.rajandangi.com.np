@@ -146,6 +146,10 @@ nav:
       - javascript/first-class-functions.md
       - javascript/callback-functions.md
       - javascript/async-js-and-event-loop.md
+      - javascript/js-engine-architecture.md
+      - javascript/higher-order-functions.md
+      - javascript/map-filter-reduce.md
+      - javascript/callback-hell.md
   - React:
       - react/index.md
       - Inception: react/inception.md
