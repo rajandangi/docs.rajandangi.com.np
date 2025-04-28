@@ -137,19 +137,30 @@ nav:
       - this Keyword: javascript/this-keyword.md
       - undefined vs not defined: javascript/undefined-vs-not-defined.md
       - javascript/loosely-typed-language.md
-      - javascript/scope-chain-scope-lexical-environment.md
-      - javascript/let-const-and-Temporal-Dead-Zone.md
-      - javascript/block-scope-function-scope-shadowing.md
-      - javascript/closures.md
-      - javascript/setTimeout-and-closures.md
-      - javascript/closure-interview-questions.md
-      - javascript/first-class-functions.md
-      - javascript/callback-functions.md
-      - javascript/async-js-and-event-loop.md
-      - javascript/js-engine-architecture.md
-      - javascript/higher-order-functions.md
-      - javascript/map-filter-reduce.md
-      - javascript/callback-hell.md
+      - JavaScript Scopes:
+          - javascript/scope-chain-scope-lexical-environment.md
+          - javascript/let-const-and-Temporal-Dead-Zone.md
+          - javascript/block-scope-function-scope-shadowing.md
+      - Closures in JavaScript:
+          - Foundation: javascript/closures.md
+          - javascript/setTimeout-and-closures.md
+          - javascript/closure-interview-questions.md
+      - Advanced JS Concepts:
+          - javascript/first-class-functions.md
+          - javascript/callback-functions.md
+          - javascript/async-js-and-event-loop.md
+          - javascript/js-engine-architecture.md
+          - javascript/higher-order-functions.md
+          - javascript/map-filter-reduce.md
+          - javascript/callback-hell.md
+          - javascript/promises.md
+          - javascript/promises-async-await.md
+          - javascript/promise-apis-all-allsettled-race-any.md
+          - javascript/call-apply-bind.md
+          - javascript/bind-polyfill.md
+          - javascript/function-currying.md
+          - javascript/debouncing-throttling.md
+          - javascript/event-deligation.md
   - React:
       - react/index.md
       - Inception: react/inception.md

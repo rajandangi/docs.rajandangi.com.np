@@ -125,4 +125,4 @@ You’ve lost control, and debugging becomes frustrating.
 
 Want cleaner code? Explore how **Promises** and **async/await** can flatten the pyramid and return control to your hands.
 
-[Continue to: Promises and async/await →](promises_async_await.md)
+:octicons-link-external-24: [Continue to: Promises →](promises.md)
