@@ -83,7 +83,11 @@ markdown_extensions:
   - pymdownx.snippets
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - tables
   - attr_list
   - md_in_html
@@ -93,6 +97,11 @@ markdown_extensions:
       custom_checkbox: true
   - abbr
   - attr_list
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.snippets:
       auto_append:
         - includes/abbreviations.md
@@ -119,6 +128,39 @@ copyright: "Copyright &copy; 2025 Rajan Dangi"
 # Page tree
 nav:
   - Home: index.md
+  - JavaScript:
+      - javascript/index.md
+      - How JavaScript Works: javascript/how-javascript-works.md
+      - Execution Context & Call Stack: javascript/javascript-call-stack.md
+      - Hoisting: javascript/hoisting.md
+      - Function invocation and Variable Environment: javascript/function-invocation-and-variable-environment.md
+      - this Keyword: javascript/this-keyword.md
+      - undefined vs not defined: javascript/undefined-vs-not-defined.md
+      - javascript/loosely-typed-language.md
+      - JavaScript Scopes:
+          - javascript/scope-chain-scope-lexical-environment.md
+          - javascript/let-const-and-Temporal-Dead-Zone.md
+          - javascript/block-scope-function-scope-shadowing.md
+      - Closures in JavaScript:
+          - Foundation: javascript/closures.md
+          - javascript/setTimeout-and-closures.md
+          - javascript/closure-interview-questions.md
+      - Advanced JS Concepts:
+          - javascript/first-class-functions.md
+          - javascript/callback-functions.md
+          - javascript/async-js-and-event-loop.md
+          - javascript/js-engine-architecture.md
+          - javascript/higher-order-functions.md
+          - javascript/map-filter-reduce.md
+          - javascript/callback-hell.md
+          - javascript/promises.md
+          - javascript/promises-async-await.md
+          - javascript/promise-apis-all-allsettled-race-any.md
+          - javascript/call-apply-bind.md
+          - javascript/bind-polyfill.md
+          - javascript/function-currying.md
+          - javascript/debouncing-throttling.md
+          - javascript/event-deligation.md
   - React:
       - react/index.md
       - Inception: react/inception.md
@@ -135,10 +177,10 @@ nav:
       - Let's Build Our Store: react/lets-build-our-store.md
       - Time for Test: react/time-for-test.md
       - useRef Hook: react/useRef-hook.md
-  - PHP: 
-    - php/index.md
-    - Dependency Injection (DI): php/dependency-injection.md
-    - Inversion of Control (IoC): php/inversion-of-control.md
+  - PHP:
+      - php/index.md
+      - Dependency Injection (DI): php/dependency-injection.md
+      - Inversion of Control (IoC): php/inversion-of-control.md
   - Blog:
       - blog/index.md
       - Download protected pdf from google drive: blog/posts/download-protected-pdf-from-google-drive.md
@@ -148,6 +190,6 @@ nav:
           - contributing/index.md
           - Reporting a bug: contributing/reporting-a-bug.md
           - Reporting a docs issue: contributing/reporting-a-docs-issue.md
-          
+
   - Reference:
       - reference/index.md

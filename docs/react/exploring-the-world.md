@@ -15,6 +15,7 @@ Traditionally, applications were built as a single large project where all compo
 ![image](assets/Monolithic-Architecture.png)
 
 **Drawbacks:**
+
 - **Size and Complexity:** Becomes too large and hard to manage.
 - **Slow Startup:** Large size can slow down startup time.
 - **Full Deployment:** Every update requires redeploying the entire application.
@@ -31,6 +32,7 @@ Instead of a single application, **Microservices** split the system into smaller
 ![image](assets/Microservices.png)
 
 **Benefits:**
+
 - **Simpler Development:** Breaks down complex applications into manageable services.
 - **Independent Teams:** Teams can develop services independently.
 - **Technology Flexibility:** Choose the best technology for each service.
@@ -259,17 +261,17 @@ console.log(phone); // Outputs: undefined
 **Explanation:**
 
 1. **Without Optional Chaining:**
-   - To safely access `user.profile.address.city`, you need to check each property exists to avoid errors.
-   - This results in a longer and more cumbersome code: `user.profile && user.profile.address && user.profile.address.city`.
+    - To safely access `user.profile.address.city`, you need to check each property exists to avoid errors.
+    - This results in a longer and more cumbersome code: `user.profile && user.profile.address && user.profile.address.city`.
 
 2. **With Optional Chaining (`?.`):**
-   - The `?.` operator simplifies the syntax by automatically checking if the preceding property exists.
-   - `user.profile?.address?.city` will return `'Wonderland'` if all properties exist.
-   - If any property in the chain is `null` or `undefined`, the entire expression short-circuits and returns `undefined` without throwing an error.
+    - The `?.` operator simplifies the syntax by automatically checking if the preceding property exists.
+    - `user.profile?.address?.city` will return `'Wonderland'` if all properties exist.
+    - If any property in the chain is `null` or `undefined`, the entire expression short-circuits and returns `undefined` without throwing an error.
 
 3. **Accessing a Non-Existent Property:**
-   - `user.contact?.phone` attempts to access the `phone` property inside `contact`.
-   - Since `contact` doesn't exist on `user`, the expression returns `undefined` instead of causing a runtime error.
+    - `user.contact?.phone` attempts to access the `phone` property inside `contact`.
+    - Since `contact` doesn't exist on `user`, the expression returns `undefined` instead of causing a runtime error.
 
 **Benefits of Using Optional Chaining:**
 

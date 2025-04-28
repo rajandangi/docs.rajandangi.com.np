@@ -34,9 +34,9 @@ export default User;
 - `super()` is a reference to the parent class constructor (`React.Component`).
 - If we want to use `this.props` or `this` keyword inside the constructor, we need to pass props to `super()`.
 
-**Note:**
-- Loading a functional component means invoking/mounting that function.
-- Loading a class-based component means creating an instance of the class.
+!!! note 
+    - Loading a functional component means invoking/mounting that function.
+    - Loading a class-based component means creating an instance of the class.
 
 ## Creating State Variables in Class-Based Components
 
@@ -123,17 +123,17 @@ class User extends React.Component {
 export default User;
 ```
 
-**Important Notes:**
-- When updating state, React will only modify the specified state variables and preserve others.
-- Loading a component means mounting it on a web page.
-- When a class-based component loads, the constructor is called first, followed by the render() method.
+!!! note "Important Notes"
+    - When updating state, React will only modify the specified state variables and preserve others.
+    - Loading a component means mounting it on a web page.
+    - When a class-based component loads, the constructor is called first, followed by the render() method.
 
 ## React Lifecycle Methods
 
 ![React Lifecycle Methods](assets/react-lifecycle-methods-diagram.png)
 
 ### Basic Component Structure
-```jsx
+```jsx linenums="1"
 import React from 'react';
 
 class App extends React.Component {
@@ -164,37 +164,37 @@ class App extends React.Component {
 Components go through these methods in order:
 
 1. **constructor()**
-   - Called first when component initializes
-   - Used to set initial state and bind methods
-   - Called only once
+    - Called first when component initializes
+    - Used to set initial state and bind methods
+    - Called only once
 
 2. **render()**
-   - Required method
-   - Returns JSX to display
-   - Pure function - should not modify state
+    - Required method
+    - Returns JSX to display
+    - Pure function - should not modify state
 
 3. **componentDidMount()**
-   - Called after component is mounted to DOM
-   - Perfect for API calls, subscriptions, or DOM manipulations
-   - Called only once after first render
+    - Called after component is mounted to DOM
+    - Perfect for API calls, subscriptions, or DOM manipulations
+    - Called only once after first render
 
 ### 2. Updating Phase (Growth of Component)
 Occurs when props or state changes:
 
 1. **render()**
-   - Called whenever there's an update
-   - Re-renders component with new changes
+    - Called whenever there's an update
+    - Re-renders component with new changes
 
 2. **componentDidUpdate(prevProps, prevState)**
-   - Called after component updates
-   - Good for side effects after state/prop changes
-   - Can compare previous and current props/state
+    - Called after component updates
+    - Good for side effects after state/prop changes
+    - Can compare previous and current props/state
 
 ### 3. Unmounting Phase (Death of Component)
-**componentWillUnmount()**
-- Called right before component is removed from DOM
-- Used for cleanup (removing event listeners, cancelling API calls)
-- Last lifecycle method to be called
+1. **componentWillUnmount()**
+    - Called right before component is removed from DOM
+    - Used for cleanup (removing event listeners, cancelling API calls)
+    - Last lifecycle method to be called
 
 ## Execution Order
 
@@ -301,28 +301,29 @@ Child Component will unmount
 
 ## Best Practices
 1. Use componentDidMount for:
-   - API calls
-   - Subscriptions
-   - DOM manipulations
+    - API calls
+    - Subscriptions
+    - DOM manipulations
 
 2. Use componentWillUnmount for:
-   - Clearing timers
-   - Cancelling API calls
-   - Removing event listeners
+    - Clearing timers
+    - Cancelling API calls
+    - Removing event listeners
 
-```jsx
-// Example of proper cleanup
-componentDidMount() {
-  this.timer = setInterval(() => {}, 1000);
-}
-
-componentWillUnmount() {
-  clearInterval(this.timer);
-}
-```
+    ```jsx
+    // Example of proper cleanup
+    componentDidMount() {
+      this.timer = setInterval(() => {}, 1000);
+    }
+    
+    componentWillUnmount() {
+      clearInterval(this.timer);
+    }
+    ```
+    
 3. Use componentDidUpdate for:
-   - Network requests based on prop changes
-   - DOM manipulations after update
+    - Network requests based on prop changes
+    - DOM manipulations after update
 
 **Note**: Modern React encourages the use of functional components with Hooks, which provide a more straightforward way to handle lifecycle events through useEffect.
 
@@ -408,7 +409,7 @@ The `componentWillUnmount` lifecycle method in React class-based components is u
 
 #### Example:
 
-```jsx
+```jsx linenums="1" hl_lines="12-15"
 class MyComponent extends React.Component {
   constructor() {
     super();
@@ -504,47 +505,49 @@ These are methods that allow you to run code at specific stages in a component's
 
 ## **Lifecycle Methods in Class Components**
 In class components, React provides specific methods to handle lifecycle events:
+
 1. **Mounting Phase**:
-   - `constructor()`: Called when the component is initialized.
-   - `render()`: Renders the component's UI.
-   - `componentDidMount()`: Called after the component is mounted to the DOM.
+    - `constructor()`: Called when the component is initialized.
+    - `render()`: Renders the component's UI.
+    - `componentDidMount()`: Called after the component is mounted to the DOM.
 
 2. **Updating Phase**:
-   - `shouldComponentUpdate()`: Determines if the component should re-render.
-   - `render()`: Re-renders the component's UI.
-   - `componentDidUpdate()`: Called after the component is updated.
+    - `shouldComponentUpdate()`: Determines if the component should re-render.
+    - `render()`: Re-renders the component's UI.
+    - `componentDidUpdate()`: Called after the component is updated.
 
 3. **Unmounting Phase**:
-   - `componentWillUnmount()`: Called before the component is removed from the DOM.
+    - `componentWillUnmount()`: Called before the component is removed from the DOM.
 
 
 ## **Lifecycle Hooks in Functional Components**
 In functional components, React Hooks (like `useEffect`) replace lifecycle methods:
+
 1. **Mounting Phase**:
-   - Use `useEffect` with an empty dependency array (`[]`) to mimic `componentDidMount`.
-   ```jsx
-   useEffect(() => {
-     console.log("Component mounted");
-   }, []);
-   ```
+    - Use `useEffect` with an empty dependency array (`[]`) to mimic `componentDidMount`.
+    ```jsx
+    useEffect(() => {
+      console.log("Component mounted");
+    }, []);
+    ```
 
 2. **Updating Phase**:
-   - Use `useEffect` with dependencies to mimic `componentDidUpdate`.
-   ```jsx
-   useEffect(() => {
-     console.log("Component updated");
-   }, [someDependency]); // Runs when `someDependency` changes
-   ```
+    - Use `useEffect` with dependencies to mimic `componentDidUpdate`.
+    ```jsx
+    useEffect(() => {
+      console.log("Component updated");
+    }, [someDependency]); // Runs when `someDependency` changes
+    ```
 
 3. **Unmounting Phase**:
-   - Return a cleanup function in `useEffect` to mimic `componentWillUnmount`.
-   ```jsx
-   useEffect(() => {
-     return () => {
-       console.log("Component will unmount");
-     };
-   }, []);
-   ```
+    - Return a cleanup function in `useEffect` to mimic `componentWillUnmount`.
+    ```jsx
+    useEffect(() => {
+      return () => {
+        console.log("Component will unmount");
+      };
+    }, []);
+    ```
 
 ---
 
@@ -597,22 +600,23 @@ export default MyComponent;
 # 🚫 **Why `useState` is Not a Lifecycle Hook**
 
 1. **Purpose**:
-   - `useState` manages **state**, not lifecycle events like mounting, updating, or unmounting.
-   - Lifecycle hooks are specifically tied to a component's lifecycle (e.g., creation, update, destruction).
+    - `useState` manages **state**, not lifecycle events like mounting, updating, or unmounting.
+    - Lifecycle hooks are specifically tied to a component's lifecycle (e.g., creation, update, destruction).
 
 2. **Behavior**:
-   - `useState` initializes state when the component first renders and preserves it across re-renders.
-   - It doesn't run code during component lifecycle events like mount or unmount.
+    - `useState` initializes state when the component first renders and preserves it across re-renders.
+    - It doesn't run code during component lifecycle events like mount or unmount.
 
 3. **Lifecycle Hooks vs. State Hooks**:
-   - Lifecycle hooks (e.g., `useEffect`) perform side effects at specific points in the component's lifecycle.
-   - `useState` is solely for managing and updating state within the component.
+    - Lifecycle hooks (e.g., `useEffect`) perform side effects at specific points in the component's lifecycle.
+    - `useState` is solely for managing and updating state within the component.
 
 ---
 
 ## 🔄 **How `useState` Relates to Lifecycle**
 
 While `useState` itself isn't a lifecycle hook, it interacts with lifecycle events indirectly:
+
 - **Mounting**: `useState` initializes the state when the component mounts.
 - **Updating**: Updating the state with the setter function (e.g., `setCount`) triggers a re-render, which is part of the component's update lifecycle.
 - However, `useState` doesn’t directly handle lifecycle events like mounting or unmounting.
@@ -669,9 +673,9 @@ You're absolutely right! React relies on the **browser's rendering engine** to d
 
 ### 2. **Browser's Rendering Pipeline**
 - The browser follows its own rendering pipeline, which includes:
-  1. **Layout/Reflow**: Calculating the size and position of elements.
-  2. **Paint**: Rendering pixels on the screen.
-  3. **Composite**: Combining layers to display the final result.
+    1. **Layout/Reflow**: Calculating the size and position of elements.
+    2. **Paint**: Rendering pixels on the screen.
+    3. **Composite**: Combining layers to display the final result.
 - React interacts with the browser's DOM API (e.g., `document.createElement`, `appendChild`) to apply changes to the actual DOM.
 
 ### 3. **Mounting and Lifecycle Events**
@@ -688,8 +692,8 @@ You're absolutely right! React relies on the **browser's rendering engine** to d
 
 ### 2. **Commit Phase**
 - React's rendering process has two phases:
-  1. **Render Phase**: React generates the virtual DOM and determines necessary changes.
-  2. **Commit Phase**: React applies these changes to the actual DOM.
+    1. **Render Phase**: React generates the virtual DOM and determines necessary changes.
+    2. **Commit Phase**: React applies these changes to the actual DOM.
 - During the **commit phase**, React updates the DOM and schedules lifecycle methods (like `componentDidMount`) or hooks (like `useEffect`) to run after the DOM update.
 
 ### 3. **Browser's Feedback to React**
@@ -716,6 +720,7 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
 1. React creates the virtual DOM for `MyComponent`.
 2. React updates the actual DOM using the browser's DOM API.
 3. Once the DOM is updated, React calls `componentDidMount`.
@@ -732,6 +737,7 @@ function MyComponent() {
   return <div>Hello, World!</div>;
 }
 ```
+
 1. React creates the virtual DOM for `MyComponent`.
 2. React updates the actual DOM using the browser's DOM API.
 3. Once the DOM is updated, React schedules the `useEffect` callback to run.
