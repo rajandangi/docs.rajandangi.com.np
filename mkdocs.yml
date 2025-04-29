@@ -176,7 +176,9 @@ nav:
       - Data is the new oil: react/data-is-the-new-oil.md
       - Let's Build Our Store: react/lets-build-our-store.md
       - Time for Test: react/time-for-test.md
-      - useRef Hook: react/useRef-hook.md
+      - Hooks: 
+        - useRef Hook: react/useRef-hook.md
+        - useMemo : react/useMemo.md
   - PHP:
       - php/index.md
       - Dependency Injection (DI): php/dependency-injection.md
