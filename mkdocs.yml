@@ -179,6 +179,10 @@ nav:
       - Hooks: 
         - useRef Hook: react/useRef-hook.md
         - useMemo : react/useMemo.md
+  - NodeJS:
+      - nodejs/index.md
+      - JS on Server: nodejs/js-on-server.md
+      - NodeJS REPL: nodejs/nodejs-repl.md
   - PHP:
       - php/index.md
       - Dependency Injection (DI): php/dependency-injection.md
