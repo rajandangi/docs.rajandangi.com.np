@@ -176,13 +176,14 @@ nav:
       - Data is the new oil: react/data-is-the-new-oil.md
       - Let's Build Our Store: react/lets-build-our-store.md
       - Time for Test: react/time-for-test.md
-      - Hooks: 
-        - useRef Hook: react/useRef-hook.md
-        - useMemo : react/useMemo.md
+      - Hooks:
+          - useRef Hook: react/useRef-hook.md
+          - useMemo: react/useMemo.md
   - NodeJS:
       - nodejs/index.md
       - JS on Server: nodejs/js-on-server.md
       - NodeJS REPL: nodejs/nodejs-repl.md
+      - Module Export & Require: nodejs/module-export-&-require.md
   - PHP:
       - php/index.md
       - Dependency Injection (DI): php/dependency-injection.md
