@@ -135,3 +135,10 @@ Node.js is open-source, and its codebase reveals how these mechanisms are implem
 *   **Error Handling:**
 
     The loader code in `cjs/loader.js` also handles errors, such as throwing a `TypeError` if you pass an invalid argument (like `undefined`) to `require()`.
+
+
+---
+
+## Further Reading
+
+- [NodeJS: Ever Wondered How ‘require()’ works](https://medium.com/@nlfernando11/nodejs-ever-wondered-how-require-works-9aedf0c52128)
