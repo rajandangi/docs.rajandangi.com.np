@@ -12,3 +12,8 @@ Before starting with PHP, you should have a basic understanding of HTML, CSS, an
 !!! note "Official Documentation"
 
     You can refer to the [official PHP documentation](https://www.php.net/manual/en/index.php) for more information.
+
+
+## Reading List
+
+- [Parallel Processing with PHP](https://dev.to/robertobutti/parallel-processing-with-php-why-how-and-when-33gh)

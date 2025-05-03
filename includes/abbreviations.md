@@ -27,3 +27,4 @@
 *[GA4]: Google Analytics 4
 *[GEC]: Global Execution Context
 *[JRE]: JavaScript Runtime Environment
+*[IIFE]: Immediately Invoked Function Expression
