@@ -100,15 +100,15 @@ Caching ensures that:
 *   **Performance:** Module code is executed only once, even if required multiple times from different parts of an application. This avoids redundant file reading and execution overhead.
 *   **Consistency:** All parts of the application requiring the same module receive the *exact same instance* (the same object in memory). This is important for modules that maintain state or represent singletons.
 
-:man_mage: **Scenario:** Imagine `app.js`, `serviceA.js`, and `serviceB.js` all need a utility module `./utils.js`.
+!!! example "Imagine `app.js`, `serviceA.js`, and `serviceB.js` all need a utility module `./utils.js`"
 
-*   **First `require('./utils.js')` (e.g., in `app.js`):**
+    *   **First `require('./utils.js')` (e.g., in `app.js`):**
 
-    Node.js performs resolving, loading, wrapping, and evaluation. The resulting `module.exports` from `utils.js` is cached.
+        Node.js performs resolving, loading, wrapping, and evaluation. The resulting `module.exports` from `utils.js` is cached.
 
-*   **Subsequent `require('./utils.js')` (e.g., in `serviceA.js`):**
+    *   **Subsequent `require('./utils.js')` (e.g., in `serviceA.js`):**
 
-    Node.js finds the cached entry for the resolved path of `./utils.js` and immediately returns the *same* `module.exports` object created earlier. The `utils.js` code is *not* executed again.
+        Node.js finds the cached entry for the resolved path of `./utils.js` and immediately returns the *same* `module.exports` object created earlier. The `utils.js` code is *not* executed again.
 
 ## Exploring the Node.js Source Code
 

@@ -185,6 +185,7 @@ nav:
       - NodeJS REPL: nodejs/nodejs-repl.md
       - Module Export & Require: nodejs/module-export-&-require.md
       - Diving into NodeJS: nodejs/diving-into-nodejs-repo.md
+      - libuv & async IO: nodejs/libuv-&-async-io.md
   - PHP:
       - php/index.md
       - Dependency Injection (DI): php/dependency-injection.md

@@ -1,6 +1,4 @@
-## 🎯 Core Goal
-
-This project documents various programming languages and technologies I've learned. The documentation uses **Material for MkDocs** and is written in **Markdown**.
+Your primary role is to help create/edit clear, concise Markdown documentation for programming topics using Material for MkDocs conventions. Pay close attention to formatting rules regarding Markdown output, emojis in headings, and image syntax. Use the provided content to apply these rules effectively.
 
 ## ✍️ Content Generation & Rewriting
 
@@ -19,6 +17,3 @@ This project documents various programming languages and technologies I've learn
 
 * Maintain a helpful and informative tone.
 * The documentation should be easy to navigate and read.
-
-
-**Summary for Copilot:** Your primary role is to help create/edit clear, concise Markdown documentation for programming topics using Material for MkDocs conventions. Pay close attention to formatting rules regarding Markdown output, emojis in headings, and image syntax.
