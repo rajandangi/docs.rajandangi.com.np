@@ -159,6 +159,29 @@ setTimeout called for 5 sec
 
 - **Asynchronous Code**: `https.get`, `setTimeout`, and `fs.readFile` are executed asynchronously. They are delegated to the runtime (Node.js) for execution, allowing the main thread to continue executing other code without waiting for these tasks to complete.
 
+- Async code executes tasks in parallel. In the example, file reading is the fastest task because it's a small local file and completes within a few milliseconds (20-30 ms). Another task is making a network request, which generally takes longer (around 100-200 ms). Finally, the `setTimeout` function is called after 5 seconds.
+
+- However,changing `fs.readFile` in to `fs.readFileSync` function is synchronous, which means it blocks execution until the file is read and returns the file content directly (or throws an error). It does not accept a callback function.
+
+```javascript linenums="1" hl_lines="6-7" title="Async Code Execution"
+fs.readFile(__dirname + "/file.txt", "utf-8", (err, data) => {
+    if (err) throw err;
+    console.log(data);
+});
+
++ const data = fs.readFileSync(__dirname + "/file.txt", "utf-8");
++ console.log(data);
+```
+
+```console title="Output"
+Hello World
+This is file content.
+250
+End of sync execution
+Data Fetched Successfully
+setTimeout called for 5 sec
+```
+
 - **Callback Execution**: Once the asynchronous tasks are completed, their callbacks are added to the callback queue. The event loop checks if the main thread is idle and moves the callbacks from the queue to the main thread for execution.
 
 This process ensures that JavaScript remains non-blocking and can handle multiple asynchronous tasks efficiently, even though it is single-threaded.
@@ -190,3 +213,8 @@ Since all I/O tasks are delegated to libuv and run on the thread pool, the main 
 
 ### Why is Non-Blocking I/O advantageous?
 Blocking I/O tasks make the CPU sit idle until a response is received, wasting resources. Since JavaScript is single-threaded, unresolved requests would prevent other requests from being served (assuming only one server instance is running). Non-blocking I/O avoids this issue, improving efficiency and scalability.
+
+
+---
+## Further Reading
+- [Trust Issue with setTimeout](../javascript/async-js-and-event-loop.md)

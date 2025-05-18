@@ -61,19 +61,25 @@ So, what actually happens when you feed JavaScript code into an engine like V8? 
 
 ### 1. Parsing: Breaking Down the Code
 
-The engine first needs to understand the structure of your code.
+The engine first needs to understand the structure of your code. This phase involves:
 
-*   **Syntax Parser:** Reads your code character by character and checks if it follows the rules (syntax) of the JavaScript language.
-*   **Abstract Syntax Tree (AST):** If the syntax is valid, the parser builds a tree-like structure representing your code's logic. Each node in the tree represents a part of your code (like a variable declaration, a function call, or an operation).
+*   **Lexical Analysis (Tokenization):** A **Lexer** or **Tokenizer** reads your code, breaking it into a sequence of individual units called **tokens** (e.g., keywords like `const`, identifiers, operators).
+*   **Syntax Parsing:** The **Syntax Parser** takes this stream of tokens and verifies that they form a grammatically correct structure according to JavaScript's syntax rules. If the syntax is valid, the parser builds an **Abstract Syntax Tree (AST)**.
+*   **Abstract Syntax Tree (AST):** This is the tree-like data structure representing the logical structure of your code. Each node in the AST corresponds to a construct in your code (like a {++VariableDeclaration++}, {++FunctionDeclaration++}, or an operation).
 
 You can visualize ASTs using tools like [AST Explorer](https://astexplorer.net/). The generated AST is then passed on to the next phase.
 
 ### 2. Compilation: Optimizing for Speed
 
-Modern JS engines don't just interpret code line by line anymore. They use sophisticated compilation techniques, often **Just-In-Time (JIT)** compilation, which combines the best of interpreters and compilers.
+Modern JS engines don't just interpret code line by line anymore.They utilize sophisticated compilation techniques, often Just-In-Time (JIT) compilation, which combines the best of *interpreters* and *compilers*.
 
-*   **Interpreter (e.g., V8's Ignition):** Takes the AST and quickly converts it into an intermediate representation called **Bytecode**. Bytecode is lower-level than JavaScript but not yet machine code. This allows the code to start executing relatively fast.
-*   **Compiler (e.g., V8's TurboFan):** While the interpreter is running, the engine monitors the code. If it identifies "hot" sections (code that runs frequently or could be made faster), the optimizing compiler kicks in. It takes the Bytecode (or sometimes the original source/AST) and generates highly optimized machine code for those specific parts. This optimized code replaces the Bytecode execution for subsequent runs, leading to significant performance improvements.
+- **Interpreter (e.g., V8's Ignition):** Takes the AST and quickly converts it into an intermediate representation called Bytecode. Bytecode is lower-level than JavaScript but not yet machine code. This allows the code to start executing relatively fast.
+
+- **Compiler (e.g., V8's TurboFan):** While the interpreter is running, the engine monitors the code. If it identifies "hot" sections (code that runs frequently or could be made faster), the optimizing compiler kicks in. It uses profiling data to generate highly optimized machine code for those specific parts.
+
+- **Optimized Code:** This optimized code replaces the Bytecode execution for subsequent runs, leading to significant performance improvements.
+
+- **Deoptimization:** If assumptions made by the optimizing compiler are invalidated, the code can be deoptimized back to Bytecode.
 
 *Note: Some engines might also perform Ahead-of-Time (AOT) compilation in certain scenarios.*
 
@@ -82,7 +88,7 @@ Compilation and execution often happen hand-in-hand in modern engines.
 ### 3. Execution: Running the Code
 
 This is where the code actually does its work. Two crucial components managed by the engine are essential for execution:
-
+le 
 1.  **Memory Heap:** A large, unstructured region of memory where objects, variables, and function definitions are stored. This is where memory allocation happens.
 2.  **Call Stack:** A data structure that keeps track of function calls. When a function is called, a new "execution context" (a frame containing the function's arguments and local variables) is pushed onto the stack. When the function finishes, its frame is popped off the stack. JavaScript is single-threaded, meaning it has only one call stack and can only do one thing at a time.
 
