@@ -633,3 +633,5 @@ File reading callback
 ## Further Reading
 
 - [Event Loop and the Big Picture](https://blog.insiderattack.net/event-loop-and-the-big-picture-nodejs-event-loop-part-1-1cb67a182810)
+- [The Node.js Event Loop](https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick)
+- [Event loop Design Overview](https://docs.libuv.org/en/v1.x/design.html)
