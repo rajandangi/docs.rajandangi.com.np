@@ -179,6 +179,8 @@ These mechanisms allow a single thread (the main event loop thread) to monitor m
 
 ==}
 
+<iframe width="99%" height="400" src="https://www.youtube.com/embed/wB9tIg209-8" title="Non-blocking I/O and how Node uses it, in friendly terms: blocking vs async IO, CPU vs IO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Key Asynchronous Concepts in Node.js
 
 To better grasp how Node.js manages all this, let's touch upon a few core concepts:
@@ -187,6 +189,9 @@ To better grasp how Node.js manages all this, let's touch upon a few core concep
 Integral to Unix-like systems (Linux, macOS), File Descriptors are small integers that the OS uses to identify open files, sockets, or other I/O resources. Socket descriptors are a specific type of FD for network connections. Work in Unix is often based around these descriptors. A `socket()` system call returns such a descriptor. These descriptors point to objects in the Kernel with a virtual "interface" (read/write/poll/close/etc.).
 
 ![file descriptor](./assets/file-descriptors.png)
+
+
+<iframe width="99%" height="400" src="https://www.youtube.com/embed/saMebwRO-Q8" title="Inside Linux File Descriptors - Mastering the Basics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Event Emitters
 A cornerstone of Node.js for handling asynchronous events. The `EventEmitter` class (from the `events` module) allows objects to emit named events that other parts of the application can listen to and react accordingly.

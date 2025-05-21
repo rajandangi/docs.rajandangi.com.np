@@ -188,6 +188,7 @@ nav:
       - libuv & async IO: nodejs/libuv-&-async-io.md
       - libuv & Event Loop: nodejs/libuv-and-event-loop.md
       - Thread pool in libuv: nodejs/thread-pool-in-libuv.md
+      - Creating a Server: nodejs/creating-a-server.md
   - PHP:
       - php/index.md
       - Dependency Injection (DI): php/dependency-injection.md
