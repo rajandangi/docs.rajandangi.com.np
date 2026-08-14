@@ -2,142 +2,71 @@
 icon: material/arrow-right
 ---
 
-# 🔁 Callback Functions and Anonymous Functions
+# 🔁 Callback Functions
 
-Callbacks are one of those JavaScript ideas that sound harder than they are. The
-function itself is ordinary. What changes is who gets to call it.
-
-You hand a function to a timer, a button, an array method, or another piece of
-code. That code calls your function when its job reaches the right point. That is
-the whole idea, but one small pair of parentheses causes a surprising amount of
-confusion.
-
-!!! success "Callback in one sentence"
-    **A callback is a function you give to other code so that code can decide when
-    to run it.**
-
-Start with these two lines:
+Callbacks are ordinary functions with a particular job. You give a function to
+some other code, and that code decides when to call it.
 
 ```javascript
-doSomething;   // The function value. No execution yet.
-doSomething(); // Invoke the function now and produce its return value.
-```
-
-If that distinction feels completely natural by the end of this guide, callbacks
-will stop looking mysterious.
-
-## 🧱 Functions Are Values
-
-JavaScript functions are [first-class values](first-class-functions.md). You can
-store one in a variable, put one in an object, return one from another function,
-or pass one as an argument. Strings and numbers are values, and functions are too.
-
-```javascript
-function greet() {
-  console.log('Hello');
-}
-
-const anotherReference = greet;
-
-console.log(typeof greet);            // "function"
-console.log(greet === anotherReference); // true
-
-anotherReference(); // "Hello"
-```
-
-`anotherReference` does not contain the *result* of `greet()`. It points to the
-same function. Nothing runs until we add parentheses.
-
-Compare that with this:
-
-```javascript
-function greet() {
-  console.log('Hello');
-  return 'finished';
-}
-
-const functionReference = greet; // Store the function.
-const returnedValue = greet();    // Run it now and store "finished".
-```
-
-| Expression | Meaning | Value produced |
-| --- | --- | --- |
-| `greet` | Refer to the function | The function object |
-| `greet()` | Invoke the function now | Whatever `greet` returns |
-| `() => greet()` | Create a new function that will invoke `greet` later | A new function object |
-
-## ☎️ So, What Makes a Function a Callback?
-
-There is no special callback syntax and no callback keyword. A normal function
-becomes a **callback** when we pass it to other code and let that code invoke it.
-
-The function receiving a callback is often called a **higher-order function**.
-
-```javascript
-function runTask(task) {
-  console.log('Before the task');
-  task();
-  console.log('After the task');
-}
-
 function sayHello() {
   console.log('Hello');
 }
 
-runTask(sayHello);
+setTimeout(sayHello, 1000);
 ```
 
-Output:
+Here, `sayHello` is the callback. The timer receives it now and calls it later.
 
-```text
-Before the task
-Hello
-After the task
-```
-
-`sayHello` is a regular function. In this example it plays the role of a callback
-because `runTask` receives it and decides when to call it.
-
-!!! note "Two common misconceptions"
-    - A callback does **not** have to be anonymous.
-    - A callback does **not** have to be asynchronous.
-
-## 🕶️ Anonymous Is About the Name, Callback Is About the Job
-
-An **anonymous function** is simply a function without an explicit name:
+Most callback confusion comes from one small pair of parentheses:
 
 ```javascript
-const greet = function () {
-  console.log('Hello');
-};
+sayHello;   // The function itself.
+sayHello(); // Call the function now.
 ```
 
-The function is anonymous even though the variable holding it is named `greet`.
-Modern JavaScript engines often infer the name `greet` for debugging, but the
-function expression itself has no explicit name.
+That distinction is the heart of this chapter.
 
-Anonymous functions are commonly created inline where a function value is needed:
+!!! info "Useful background"
+    This chapter assumes you already know that JavaScript functions can be passed
+    around as values. If that idea is new, begin with [First-Class
+    Functions](first-class-functions.md) and [Higher-Order
+    Functions](higher-order-functions.md).
+
+## ☎️ What Makes a Function a Callback?
+
+JavaScript has no `callback` keyword. A function becomes a callback because of how
+it is used.
 
 ```javascript
-setTimeout(function () {
-  console.log('Timer finished');
-}, 1000);
+function runTask(task) {
+  task();
+}
 
-document.addEventListener('click', () => {
-  console.log('Document clicked');
+runTask(function printMessage() {
+  console.log('Task is running');
 });
 ```
 
-This gives us an important distinction. **Anonymous** describes the function's
-name. **Callback** describes the job it is doing.
+`printMessage` is passed into `runTask`. The parameter named `task` holds that
+function, and `task()` invokes it.
 
-| Term | Describes | Example |
-| --- | --- | --- |
-| **Anonymous function** | Whether the function has its own name | `function () {}` |
-| **Named function** | A function with an explicit name | `function saveDraft() {}` |
-| **Callback function** | How a function is passed and later invoked | `setTimeout(saveDraft, 1000)` |
+The code receiving a callback controls the callback's contract:
 
-The same function can be both anonymous and a callback:
+- when it runs;
+- how many times it can run;
+- which arguments it receives;
+- what happens to its return value;
+- how errors are handled.
+
+!!! note "Callback does not mean asynchronous"
+    `Array.prototype.map()` invokes its callback immediately for every item.
+    `setTimeout()` invokes its callback later. Both functions accept callbacks,
+    but their timing is different.
+
+## 🕶️ Anonymous Function and Callback Are Not Synonyms
+
+**Anonymous** describes whether a function has a name. **Callback** describes how
+the function is used. This is an anonymous callback:
 
 ```javascript
 setTimeout(function () {
@@ -145,17 +74,20 @@ setTimeout(function () {
 }, 1000);
 ```
 
-Or named and a callback:
+A callback can also be named:
 
 ```javascript
-function announceCompletion() {
+function showMessage() {
   console.log('Named callback');
 }
 
-setTimeout(announceCompletion, 1000);
+setTimeout(showMessage, 1000);
 ```
 
-## ⚖️ The Parentheses That Change Everything
+See [First-Class Functions](first-class-functions.md#anonymous-function) for the
+different ways functions can be declared and named.
+
+## ⚖️ Passing a Function vs. Calling It
 
 Suppose we want to display a reminder after one second:
 
@@ -165,32 +97,30 @@ function showReminder() {
 }
 ```
 
-### Incorrect: invoke it while registering the timer
+### Calling it too early
 
 ```javascript
 setTimeout(showReminder(), 1000);
 ```
 
-This looks close, but the parentheses tell JavaScript to run `showReminder` while
-it is preparing the arguments for `setTimeout`. The actual order is:
+JavaScript evaluates function arguments before it calls `setTimeout`. The order is:
 
-1. Evaluate `showReminder()`.
-2. `showReminder` runs immediately.
-3. Take its return value, normally `undefined`.
-4. Pass that return value to `setTimeout` instead of passing a function.
+1. Call `showReminder()` immediately.
+2. Take its return value, which is `undefined` here.
+3. Pass that return value to `setTimeout`.
 
-The timer never receives the function. It receives whatever the function returned.
+The timer never receives the function.
 
-### Correct: pass the function itself
+### Passing the function
 
 ```javascript
 setTimeout(showReminder, 1000);
 ```
 
-Without parentheses, the timer receives the function itself. It can keep that
-reference and invoke it after the delay.
+Without parentheses, `showReminder` refers to the function itself. The timer can
+store that reference and call it after the delay.
 
-### Also correct: pass a wrapper function
+### Passing a wrapper
 
 ```javascript
 setTimeout(function () {
@@ -198,7 +128,11 @@ setTimeout(function () {
 }, 1000);
 ```
 
-Or with an arrow function:
+The anonymous function is created immediately, but its body does not run yet.
+`showReminder()` is inside that body, so it waits until the timer calls the
+wrapper.
+
+The arrow-function version works the same way:
 
 ```javascript
 setTimeout(() => {
@@ -206,77 +140,37 @@ setTimeout(() => {
 }, 1000);
 ```
 
-The wrapper is created immediately, but creating a function is not the same as
-running its body. `showReminder()` sits inside that body and waits until the timer
-calls the wrapper.
+!!! tip "Read the code literally"
+    - `setTimeout(showReminder(), 1000)` means “call it now and pass its result.”
+    - `setTimeout(showReminder, 1000)` means “pass it so the timer can call it.”
+    - `setTimeout(() => showReminder(), 1000)` means “pass a function that will
+      call it.”
 
-### Why the wrapper behaves differently
+## 📦 When a Wrapper Is Useful
 
-Compare when the parentheses are evaluated:
-
-```javascript
-setTimeout(showReminder(), 1000);
-//         ^^^^^^^^^^^^^
-// Evaluated now as an argument to setTimeout.
-
-setTimeout(function () {
-  showReminder();
-  // ^^^^^^^^^^^
-  // Evaluated later, inside the callback body.
-}, 1000);
-```
-
-!!! tip "Read it out loud"
-    - `setTimeout(showReminder(), 1000)` means “call `showReminder` now, then pass
-      its result.”
-    - `setTimeout(showReminder, 1000)` means “pass `showReminder` so the timer can
-      call it later.”
-    - `setTimeout(() => showReminder(), 1000)` means “pass a new function that
-      will call `showReminder` later.”
-
-## 📦 When a Wrapper Earns Its Keep
-
-Pass the original function when it already does exactly what you need:
+Pass the original function when it already has the shape you need:
 
 ```javascript
 setTimeout(showReminder, 1000);
 ```
 
-A wrapper becomes useful when you need to:
-
-- pass arguments;
-- call more than one function;
-- add a condition;
-- transform the callback's input or output;
-- preserve a particular lexical `this` with an arrow function.
-
-### Pass arguments later
+Use a wrapper when you need to supply arguments:
 
 ```javascript
-function greetUser(name, punctuation) {
-  console.log(`Hello, ${name}${punctuation}`);
+function greet(name) {
+  console.log(`Hello, ${name}`);
 }
 
-setTimeout(() => greetUser('Maya', '!'), 1000);
+setTimeout(() => greet('Maya'), 1000);
 ```
 
-This is wrong if the intention is to delay the call:
+Calling `greet` directly would run it too early:
 
 ```javascript
-setTimeout(greetUser('Maya', '!'), 1000);
+setTimeout(greet('Maya'), 1000); // Incorrect.
 ```
 
-### Perform multiple operations later
-
-```javascript
-setTimeout(() => {
-  showSpinner();
-  refreshDashboard();
-  hideSpinner();
-}, 1000);
-```
-
-### Decide at execution time
+A wrapper can also make a decision at execution time:
 
 ```javascript
 setTimeout(() => {
@@ -286,28 +180,12 @@ setTimeout(() => {
 }, 1000);
 ```
 
-The visibility check happens when the callback runs, not when the timer is
-registered.
+The visibility check happens when the callback runs, not when the timer is created.
 
-## 🧩 Who Supplies the Callback Arguments?
+## 🧩 The Caller Supplies the Arguments
 
-The caller chooses the arguments. That sounds obvious, but it explains many odd
-callback bugs. When your code calls `callback(user)`, the callback gets a user. When
-the browser calls an event listener, the listener gets an event object.
-
-```javascript
-function processUser(callback) {
-  const user = { id: 42, name: 'Rajan' };
-  callback(user);
-}
-
-processUser(function (user) {
-  console.log(user.name); // "Rajan"
-});
-```
-
-Every callback-based API has a small contract. For example,
-`Array.prototype.map` passes the current value, index, and original array:
+A callback does not choose which arguments it receives. The code invoking it does.
+For example, `map()` passes the current value, its index, and the original array:
 
 ```javascript
 const colours = ['Blue', 'Green'];
@@ -319,138 +197,24 @@ const labels = colours.map(function (colour, index) {
 console.log(labels); // ["1. Blue", "2. Green"]
 ```
 
-Event listeners receive an event object:
+This is why a wrapper can be useful when an existing function expects a different
+signature:
 
 ```javascript
-button.addEventListener('click', function (event) {
-  console.log(event.type);          // "click"
-  console.log(event.currentTarget); // The button.
-});
+['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
 ```
 
-### Timer arguments
-
-Browsers can pass additional `setTimeout` arguments to the callback:
+`map` passes the index as the second argument. `parseInt` treats that argument as
+the radix. A wrapper adapts one contract to the other:
 
 ```javascript
-function greet(name) {
-  console.log(`Hello, ${name}`);
-}
-
-setTimeout(greet, 1000, 'Rajan');
+['1', '2', '3'].map((value) => parseInt(value, 10)); // [1, 2, 3]
 ```
 
-The wrapper form is often easier to spot at a glance, and the same pattern works
-with almost every callback API:
+## ↩️ Return Values and Async Boundaries
 
-```javascript
-setTimeout(() => greet('Rajan'), 1000);
-```
-
-## ⏱️ Callback Does Not Automatically Mean "Later"
-
-A callback can run now or later. The API receiving it makes that decision.
-
-### Synchronous callback
-
-Array methods such as `map`, `filter`, and `forEach` invoke their callbacks during
-the current call stack:
-
-```javascript
-console.log('A');
-
-[1, 2, 3].forEach(function (number) {
-  console.log(number);
-});
-
-console.log('B');
-```
-
-Output:
-
-```text
-A
-1
-2
-3
-B
-```
-
-### Asynchronous callback
-
-Timers and event listeners arrange for callbacks to run after the current
-synchronous work has finished and the relevant condition has been met:
-
-```javascript
-console.log('A');
-
-setTimeout(function () {
-  console.log('Timer callback');
-}, 0);
-
-console.log('B');
-```
-
-Output:
-
-```text
-A
-B
-Timer callback
-```
-
-Even a zero-millisecond timer does not interrupt the current call stack.
-
-!!! warning "A callback does not make heavy work non-blocking"
-    Moving a CPU-heavy loop into `setTimeout` only postpones the blocking work.
-    When the callback eventually runs on the main thread, it can still freeze the
-    page. Truly CPU-intensive browser work may need to be split into smaller tasks
-    or moved to a Web Worker.
-
-## ⌛ A Timer Is a Threshold, Not an Appointment
-
-`setTimeout` does not reserve the JavaScript engine for an exact moment. Its delay
-is a **minimum threshold**.
-
-```javascript
-setTimeout(runReport, 1000);
-```
-
-Read this as: make `runReport` eligible to run after roughly 1000 milliseconds. If
-JavaScript is busy at that point, the callback waits its turn.
-
-```javascript
-const startedAt = Date.now();
-
-setTimeout(() => {
-  console.log(Date.now() - startedAt);
-}, 100);
-
-// Occupy the main thread for around 500 ms.
-while (Date.now() - startedAt < 500) {
-  // Busy work for demonstration only.
-}
-```
-
-The callback cannot run after 100 ms because the main thread is still busy. The
-logged time will be approximately 500 ms or more.
-
-The simplified flow is:
-
-1. JavaScript calls `setTimeout` with a callback and delay.
-2. The host environment manages the timer.
-3. Once the threshold passes, the callback becomes eligible for scheduling.
-4. The event loop waits for the current call stack to become empty.
-5. JavaScript invokes the callback.
-
-For the full scheduling model, see [Asynchronous JavaScript and the Event
-Loop](async-js-and-event-loop.md).
-
-## ↩️ Where Does a Callback's Return Value Go?
-
-`return` always returns to the function's caller. With a timer callback, the timer
-machinery is the caller, not `getMessage`. That is why this code cannot return the
-future message:
+`return` sends a value back to the function's caller. It does not travel backwards
+through time to a function that has already finished.
 
 ```javascript
 function getMessage() {
@@ -459,14 +223,14 @@ function getMessage() {
   }, 1000);
 }
 
-const message = getMessage();
-console.log(message); // undefined
+console.log(getMessage()); // undefined
 ```
 
-`getMessage()` has already finished by the time the callback runs. One second
-later, `'Finished'` goes back to the timer machinery, where nothing uses it.
+`getMessage()` finishes before the timer callback runs. When the callback later
+returns `'Finished'`, it returns that value to the timer machinery, which does not
+use it.
 
-With callback-style code, pass the result to another callback:
+In callback-style code, pass the result to another callback:
 
 ```javascript
 function getMessage(onComplete) {
@@ -476,58 +240,24 @@ function getMessage(onComplete) {
 }
 
 getMessage(function (message) {
-  console.log(message); // "Finished"
+  console.log(message);
 });
 ```
 
-With modern asynchronous code, a Promise can represent the future result:
+Promises provide a cleaner way to represent a future result. That subject belongs
+in [Promises](promises.md), where chaining, rejection, and `async`/`await` are
+covered properly.
+
+## 🪪 Function Identity Matters
+
+Every function expression creates a new function object:
 
 ```javascript
-function getMessage() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve('Finished'), 1000);
-  });
-}
-
-const message = await getMessage();
-console.log(message); // "Finished"
+console.log(function () {} === function () {}); // false
 ```
 
-See [Promises](promises.md) and [Promises with async/await](promises-async-await.md)
-for the modern approach to composing asynchronous results.
-
-## 🖱️ Event Listeners: Callbacks Waiting for a Signal
-
-An event listener is a callback parked beside an event. The browser stores it and
-invokes it whenever that event occurs:
-
-```html
-<button id="save-button">Save</button>
-
-<script>
-  const button = document.getElementById('save-button');
-
-  button.addEventListener('click', function handleSaveClick(event) {
-    console.log('Saving from', event.currentTarget);
-  });
-</script>
-```
-
-`handleSaveClick` is a **named callback**. The click determines when it runs.
-
-### Do not invoke an event handler while registering it
-
-```javascript
-button.addEventListener('click', handleSaveClick()); // Incorrect.
-button.addEventListener('click', handleSaveClick);   // Correct.
-```
-
-The first line invokes `handleSaveClick` during setup and passes its return value
-as the listener. This is the same mistake as `setTimeout(showReminder(), 1000)`.
-
-### Removing a listener requires the same function reference
-
-This does **not** remove the first listener:
+This matters when an API expects the same callback reference later. The following
+code does not remove the listener:
 
 ```javascript
 button.addEventListener('click', function () {
@@ -539,8 +269,8 @@ button.removeEventListener('click', function () {
 });
 ```
 
-Although the two functions contain identical code, they are two different function
-objects.
+The two functions look identical, but they are different objects. Store or name
+the callback when you will need it again:
 
 ```javascript
 function handleClick() {
@@ -551,554 +281,63 @@ button.addEventListener('click', handleClick);
 button.removeEventListener('click', handleClick);
 ```
 
-This works because both calls receive the same reference.
-
-For one-time listeners, the browser also provides an option:
+The same issue appears when setup code creates a fresh listener every time it runs:
 
 ```javascript
-button.addEventListener('click', handleClick, { once: true });
-```
-
-## 🏷️ Choosing Between Anonymous, Named, and Arrow Callbacks
-
-All four forms below are valid. The useful question is not "Which syntax is best?"
-but "Which one makes this particular callback easiest to understand and manage?"
-
-```javascript
-// Named function declaration.
-function handleSave() {
-  console.log('Saved');
-}
-setTimeout(handleSave, 1000);
-
-// Anonymous function expression.
-setTimeout(function () {
-  console.log('Saved');
-}, 1000);
-
-// Named function expression.
-setTimeout(function handleSaveTimer() {
-  console.log('Saved');
-}, 1000);
-
-// Anonymous arrow function.
-setTimeout(() => {
-  console.log('Saved');
-}, 1000);
-```
-
-### When an anonymous callback is a good choice
-
-Use one when the callback is:
-
-- short and used in only one place;
-- immediately understandable beside the API call;
-- not required later for cleanup;
-- unlikely to need independent testing or reuse.
-
-```javascript
-const activeUsernames = users
-  .filter((user) => user.active)
-  .map((user) => user.username);
-```
-
-### When a named callback is a better choice
-
-Name it when the callback:
-
-- contains non-trivial business logic;
-- is reused;
-- must be removed later;
-- is recursive;
-- benefits from a meaningful stack-trace name;
-- should be tested independently.
-
-```javascript
-function isActiveUser(user) {
-  return user.active;
-}
-
-function getUsername(user) {
-  return user.username;
-}
-
-const activeUsernames = users
-  .filter(isActiveUser)
-  .map(getUsername);
-```
-
-A name is not automatically an improvement. Use one when it helps explain intent,
-debug a failure, reuse the code, or manage the callback's lifecycle.
-
-## 🧭 The `this` Question
-
-Regular functions get `this` from the way they are called. Arrow functions do not
-create their own `this`; they borrow it from the surrounding scope. That difference
-matters as soon as an object method becomes a callback.
-
-```javascript
-const player = {
-  name: 'Maya',
-
-  startWithRegularFunction() {
-    setTimeout(function () {
-      console.log(this.name); // Usually undefined in this example.
-    }, 1000);
-  },
-
-  startWithArrowFunction() {
-    setTimeout(() => {
-      console.log(this.name); // "Maya"
-    }, 1000);
-  },
-};
-```
-
-The arrow callback closes over the `this` value from `startWithArrowFunction`.
-Another explicit option is `bind`:
-
-```javascript
-setTimeout(function () {
-  console.log(this.name);
-}.bind(player), 1000);
-```
-
-Event listeners require extra care. With a regular function, `this` is generally
-the element on which the listener was registered; with an arrow function, it is
-the surrounding lexical `this`. Prefer `event.currentTarget` when referring to the
-element because the intent is clearer:
-
-```javascript
-button.addEventListener('click', (event) => {
-  console.log(event.currentTarget);
-});
-```
-
-## 🧠 How a Callback Remembers Its Surroundings
-
-A callback carries access to the scope where it was created, even when it runs
-later. That behaviour is called a [closure](closures.md).
-
-```javascript
-function createCounter(label) {
-  let count = 0;
-
-  return function increment() {
-    count += 1;
-    console.log(`${label}: ${count}`);
-  };
-}
-
-const countClicks = createCounter('Clicks');
-
-countClicks(); // "Clicks: 1"
-countClicks(); // "Clicks: 2"
-```
-
-One detail is easy to miss: a closure keeps access to a variable, not a frozen copy
-of its value. If the value changes before the callback runs, the callback sees the
-new value:
-
-```javascript
-let status = 'draft';
-
-setTimeout(() => {
-  console.log(status); // "published"
-}, 1000);
-
-status = 'published';
-```
-
-Take a snapshot yourself when you need the old value:
-
-```javascript
-let status = 'draft';
-const scheduledStatus = status;
-
-setTimeout(() => {
-  console.log(scheduledStatus); // "draft"
-}, 1000);
-
-status = 'published';
-```
-
-## 🚨 Errors Have to Be Caught Where They Happen
-
-A `try...catch` around timer registration cannot catch an error thrown later by
-the timer callback:
-
-```javascript
-try {
-  setTimeout(() => {
-    throw new Error('Report failed');
-  }, 1000);
-} catch (error) {
-  // This does not catch the later error.
-  console.error(error);
+function render() {
+  window.addEventListener('resize', () => updateLayout());
 }
 ```
 
-The outer `try` is long gone by the time the callback runs. Put the error handling
-inside the asynchronous boundary:
+Each call to `render()` creates another function. Long-lived listeners should
+normally be registered once or removed during cleanup.
 
-```javascript
-setTimeout(() => {
-  try {
-    generateReport();
-  } catch (error) {
-    console.error('Report failed', error);
-  }
-}, 1000);
-```
+## 🔍 A Quick Debugging Routine
 
-Promise-based APIs propagate asynchronous failure through rejection, allowing
-`await` with `try...catch`.
+When a callback behaves unexpectedly, ask:
 
-### Error-first callbacks
-
-Many traditional Node.js APIs use an **error-first callback** contract:
-
-```javascript
-readSomething(function (error, value) {
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  console.log(value);
-});
-```
-
-The first argument represents an error, and the later arguments contain successful
-results. Always check the documented callback signature of the API you are using.
-
-## 🪤 Callback Traps Worth Remembering
-
-### 1. Calling instead of passing
-
-```javascript
-setTimeout(save(), 1000); // Wrong: save runs now.
-setTimeout(save, 1000);   // Correct: the timer runs save later.
-```
-
-### 2. Expecting a delayed callback to return from the outer function
-
-```javascript
-function loadValue() {
-  setTimeout(() => {
-    return 42;
-  }, 1000);
-}
-
-console.log(loadValue()); // undefined
-```
-
-Use another callback, a Promise, or `async`/`await` to communicate the future
-result.
-
-### 3. Losing the function reference needed for cleanup
-
-```javascript
-window.addEventListener('resize', () => updateLayout());
-
-// There is no stored reference to pass to removeEventListener later.
-```
-
-When cleanup matters, store or name the callback:
-
-```javascript
-function handleResize() {
-  updateLayout();
-}
-
-window.addEventListener('resize', handleResize);
-window.removeEventListener('resize', handleResize);
-```
-
-### 4. Creating new listeners during repeated renders
-
-```javascript
-function renderForm() {
-  window.addEventListener('click', () => handleGlobalClick());
-}
-```
-
-Every render creates a new function object, so each one is a distinct listener.
-Register global listeners once, or retain each reference and clean it up before
-registering another. Registering the *same* callback reference more than once with
-the same event type and capture option is ignored by `addEventListener`, but a new
-inline wrapper has a new identity every time.
-
-### 5. Accidentally relying on `this`
-
-```javascript
-setTimeout(profile.save, 1000);
-```
-
-Passing a method separately from its object can lose its intended receiver. Use a
-wrapper or bind it:
-
-```javascript
-setTimeout(() => profile.save(), 1000);
-setTimeout(profile.save.bind(profile), 1000);
-```
-
-### 6. Passing extra callback arguments unintentionally
-
-Some array methods pass more arguments than a reused function expects:
-
-```javascript
-['1', '2', '3'].map(parseInt); // [1, NaN, NaN]
-```
-
-`map` passes `(value, index, array)`, while `parseInt` interprets its second
-argument as the radix. Adapt the signature with a wrapper:
-
-```javascript
-['1', '2', '3'].map((value) => parseInt(value, 10)); // [1, 2, 3]
-```
-
-### 7. Creating callback hell
-
-Deeply nested asynchronous callbacks make control flow and error handling hard to
-follow:
-
-```javascript
-getUser(userId, (user) => {
-  getOrders(user.id, (orders) => {
-    getReceipt(orders[0].id, (receipt) => {
-      renderReceipt(receipt);
-    });
-  });
-});
-```
-
-Small named functions can help, while Promises and `async`/`await` usually make
-sequential asynchronous workflows easier to compose. See [Callback
-Hell](callback-hell.md).
-
-## 🧹 Function Identity, Memory, and Cleanup
-
-An event target holds on to its listeners. Those listeners may in turn hold values
-through closures. That is useful while a feature is alive, but a forgotten
-listener can retain memory and perform duplicate work long after the feature has
-gone away.
-
-```javascript
-function mountDashboard() {
-  const largeDashboardModel = loadDashboardModel();
-
-  function handleDashboardRefresh() {
-    renderDashboard(largeDashboardModel);
-  }
-
-  window.addEventListener('dashboard-refresh', handleDashboardRefresh);
-
-  return function unmountDashboard() {
-    window.removeEventListener('dashboard-refresh', handleDashboardRefresh);
-  };
-}
-
-const cleanup = mountDashboard();
-
-// Later, when the feature is removed:
-cleanup();
-```
-
-The returned cleanup function closes over the exact callback reference used during
-registration.
-
-Timers can also be cancelled by retaining their IDs:
-
-```javascript
-const timerId = setTimeout(showReminder, 1000);
-
-// Cancel it if the user leaves before it runs.
-clearTimeout(timerId);
-```
-
-## 🛠️ If You Design a Callback API
-
-Do not make callers guess. A callback API should answer four questions:
-
-1. **When** the callback runs.
-2. Whether it can run **once or multiple times**.
-3. Which **arguments** it receives.
-4. How **errors and cleanup** work.
-
-```javascript
-function forEachActiveUser(users, callback) {
-  for (const user of users) {
-    if (user.active) {
-      callback(user.id, user);
-    }
-  }
-}
-
-forEachActiveUser(users, (id, user) => {
-  console.log(`Active user ${id}: ${user.username}`);
-});
-```
-
-Here the callback runs synchronously, may run more than once, and receives an ID
-plus the complete user object. A reader can understand the contract without digging
-through the implementation.
-
-If the API performs one future operation that either succeeds or fails, returning
-a Promise is often easier for callers than inventing a new callback convention.
-
-## 🔍 Debugging a Callback Without Guessing
-
-When a callback behaves strangely, walk through these questions in order:
-
-1. Am I passing a function, or invoking it?
+1. Am I passing the function or calling it?
 2. Who invokes the callback?
-3. Is it invoked synchronously or asynchronously?
-4. What arguments does the caller provide?
+3. Does it run now or later?
+4. Which arguments does the caller supply?
 5. Can it run more than once?
-6. What will `this` be?
-7. Which variables does its closure capture?
-8. How is it cancelled or removed?
-9. Where must errors be handled?
+6. Will I need the same function reference for cleanup?
 
-### Add logs at registration and execution
+Once the hand-off itself is clear, follow the topic that owns the remaining
+problem:
 
-```javascript
-console.log('Setting the timer');
-
-setTimeout(() => {
-  console.log('Running the timer callback');
-  showReminder();
-}, 1000);
-
-console.log('Timer configured');
-```
-
-The output makes the hand-off visible:
-
-```text
-Setting the timer
-Timer configured
-Running the timer callback
-```
-
-### Prefer names for important callbacks
-
-```javascript
-setTimeout(function showScheduledReminder() {
-  showReminder();
-}, 1000);
-```
-
-A meaningful name documents the intent and produces a more useful stack trace.
-
-### Test the callback separately
-
-Move substantial logic into a named function, test that function directly, and
-keep the scheduling layer small:
-
-```javascript
-function buildStatusMessage(processed, total) {
-  return `${processed} of ${total} items processed`;
-}
-
-setTimeout(() => {
-  statusElement.textContent = buildStatusMessage(3, 5);
-}, 1000);
-```
-
-## ✅ Which Form Should I Use?
-
-| Need | Prefer |
+| Problem | Continue with |
 | --- | --- |
-| Run an existing no-argument function later | `setTimeout(save, 1000)` |
-| Supply arguments later | `setTimeout(() => save(id), 1000)` |
-| Remove an event listener later | A stored or named function reference |
-| Keep a tiny one-off transformation beside an array method | An inline arrow callback |
-| Improve stack traces or test complex callback logic | A named callback |
-| Preserve surrounding `this` | An arrow callback |
-| Preserve an object's method receiver | `() => object.method()` or `object.method.bind(object)` |
-| Represent one future success/failure result | Usually a Promise |
-| Cancel a timer | Store its ID and call `clearTimeout(id)` |
+| A callback sees an unexpected outer variable | [Closures](closures.md) |
+| A method loses its `this` value | [`call`, `apply`, and `bind`](call-apply-bind.md) |
+| A timer or event runs in an unexpected order | [Asynchronous JavaScript and the Event Loop](async-js-and-event-loop.md) |
+| Nested callbacks hide the workflow | [Callback Hell](callback-hell.md) |
+| A future result or error is difficult to pass along | [Promises](promises.md) |
 
-## 🧪 Check Your Understanding
-
-### When does `save` run?
+## 🧠 Keep This Picture in Your Head
 
 ```javascript
-setTimeout(save(), 1000);
-```
+function save() {}     // Create a function.
 
-??? answer "Answer"
-    Immediately. Its return value is passed to `setTimeout`.
+const task = save;      // Store or pass the function.
+task();                 // Invoke the function.
 
-```javascript
-setTimeout(save, 1000);
-```
-
-??? answer "Answer"
-    After the timer threshold has passed and JavaScript is able to run the
-    callback.
-
-```javascript
-setTimeout(() => save(), 1000);
-```
-
-??? answer "Answer"
-    The arrow function is created immediately. `save()` runs later, when the timer
-    invokes the arrow function.
-
-### Is every anonymous function a callback?
-
-??? answer "Answer"
-    No. “Anonymous” means the function has no explicit name. It becomes a callback
-    only when it is passed to code that will invoke it.
-
-### Is every callback asynchronous?
-
-??? answer "Answer"
-    No. `map`, `filter`, and `forEach` use synchronous callbacks. Timers and event
-    listeners are asynchronous scheduling mechanisms.
-
-### Why can two identical anonymous functions have different identities?
-
-```javascript
-console.log(
-  function () {} === function () {}
-); // false
-```
-
-??? answer "Answer"
-    Each function expression creates a new function object. Equal-looking source
-    code does not make them the same reference.
-
-## 🧠 Put It All Together
-
-Whenever callback code gets confusing, separate three actions: **creating** a
-function, **passing** it somewhere, and **invoking** it.
-
-```javascript
-function save() {}       // Create a named function.
-const task = save;        // Pass or store its function value.
-task();                   // Invoke it.
-
-const later = () => {     // Create an anonymous arrow function.
-  save();                 // Invoke save only when later() runs.
+const later = () => {   // Create a wrapper.
+  save();               // This runs when later() is invoked.
 };
 
-setTimeout(later, 1000);  // Pass later to the timer.
+setTimeout(later, 1000);
 ```
 
-Follow every pair of parentheses. Ask who placed it there and when that line gets
-executed. That small habit untangles most callback code.
+If you can identify who owns each pair of parentheses and when that line runs, you
+can follow most callback code without guessing.
 
-## 📚 Related Reading
+## 📚 Continue Learning
 
-- [First-Class Functions](first-class-functions.md)
-- [Higher-Order Functions](higher-order-functions.md)
-- [Closures](closures.md)
-- [`setTimeout` and Closures](setTimeout-and-closures.md)
-- [Asynchronous JavaScript and the Event Loop](async-js-and-event-loop.md)
-- [Callback Hell](callback-hell.md)
-- [Promises](promises.md)
-- [Promises with async/await](promises-async-await.md)
+- [First-Class Functions](first-class-functions.md) for function forms and values
+- [Higher-Order Functions](higher-order-functions.md) for functions that receive or return functions
+- [Closures](closures.md) for variables remembered by callbacks
+- [`setTimeout` and Closures](setTimeout-and-closures.md) for timer loop questions
+- [Asynchronous JavaScript and the Event Loop](async-js-and-event-loop.md) for scheduling
+- [Callback Hell](callback-hell.md) for nested asynchronous workflows
+- [Promises](promises.md) for future values and error propagation
