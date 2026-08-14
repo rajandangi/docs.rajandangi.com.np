@@ -147,7 +147,7 @@ nav:
           - javascript/closure-interview-questions.md
       - Advanced JS Concepts:
           - javascript/first-class-functions.md
-          - javascript/callback-functions.md
+          - Callback & Anonymous Functions: javascript/callback-functions.md
           - javascript/async-js-and-event-loop.md
           - javascript/js-engine-architecture.md
           - javascript/higher-order-functions.md

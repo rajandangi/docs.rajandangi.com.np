@@ -10,7 +10,7 @@ Understanding **Monolithic** and **Microservices** architectures is essential in
 
 #### Monolithic Architecture
 
-Traditionally, applications were built as a single large project where all components—APIs, user interface, database connections, authentication, and notification services—resided in one codebase.
+Traditionally, applications were built as a single large project where all components, including APIs, user interface, database connections, authentication, and notification services, resided in one codebase.
 
 ![image](assets/Monolithic-Architecture.png)
 

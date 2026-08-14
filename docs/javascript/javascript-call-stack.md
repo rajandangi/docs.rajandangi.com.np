@@ -105,7 +105,7 @@ After the code runs:
 
 The **call stack** is a fundamental mechanism in JavaScript that manages the creation, deletion, and control of execution contexts during code execution.
 
-The call stack works just like a physical stack—**last in, first out (LIFO)**. At the bottom of the stack is the **Global Execution Context (GEC)**. Whenever a JavaScript program runs, the GEC is created and pushed onto the call stack.
+The call stack works just like a physical stack: **last in, first out (LIFO)**. At the bottom of the stack is the **Global Execution Context (GEC)**. Whenever a JavaScript program runs, the GEC is created and pushed onto the call stack.
 
 ### :material-filter: Step-by-Step Example
 
