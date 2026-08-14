@@ -66,7 +66,7 @@ Key characteristics:
 
 *   The function is treated like a value.
 *   It's assigned to a variable (`greetMe`).
-*   If using `var`, the variable declaration (`var greetMe`) is hoisted, but the assignment (`= function() {...}`) is not. This is why you get a `TypeError` if you call it before the assignment line – `greetMe` exists but holds `undefined` initially, not the function.
+*   If using `var`, the variable declaration (`var greetMe`) is hoisted, but the assignment (`= function() {...}`) is not. This is why you get a `TypeError` if you call it before the assignment line. `greetMe` exists but holds `undefined` initially, not the function.
 
 ---
 
@@ -94,6 +94,11 @@ setTimeout(function() {
     console.log("This anonymous function runs after 1 second");
 }, 1000);
 ```
+
+The anonymous function above is also a **callback** because it is passed to
+`setTimeout`, which decides when to invoke it. See [Callback Functions and
+Anonymous Functions](callback-functions.md) for the complete mental model,
+including the crucial difference between passing `fn` and invoking `fn()`.
 
 !!! question "Why the error?"
 

@@ -4,7 +4,7 @@ icon: material/arrow-right
 
 # Callback Hell in JavaScript
 
-Callbacks help JavaScript handle asynchronous operations. But when callbacks pile up, they create a messy, hard-to-follow nest—famously known as **Callback Hell**.
+Callbacks help JavaScript handle asynchronous operations. But when callbacks pile up, they create a messy, hard-to-follow nest commonly known as **Callback Hell**.
 
 ---
 
@@ -92,7 +92,7 @@ createOrder(cart, function(order) {
 });
 ```
 
-> **Each callback gets its result as an argument—just like real-world async APIs!**
+> **Each callback gets its result as an argument, just like real-world async APIs!**
 
 ---
 
@@ -106,7 +106,7 @@ createOrder(cart, function(order) {
 
 ## The Inversion of Control Trap
 
-A callback doesn’t just mess with code structure—it hands over program flow to someone else.
+A callback doesn’t just mess with code structure. It hands over program flow to someone else.
 
 Suppose the API authors aren’t careful:
 
@@ -117,7 +117,7 @@ Suppose the API authors aren’t careful:
 You’ve lost control, and debugging becomes frustrating.
 
 !!! notice "Inversion of Control"
-    When you pass a function to another module, you trust it to handle your logic correctly—but you can’t be sure it will!
+    When you pass a function to another module, you trust it to handle your logic correctly, but you can’t be sure it will!
 
 ---
 

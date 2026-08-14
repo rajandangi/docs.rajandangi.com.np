@@ -11,7 +11,7 @@ Splitting code into multiple files keeps a Node.js project organized and maintai
 ## CommonJS Modules (CJS)
 
 ### :no_bell: Problem
-You have two files : `app.js` and `xyz.js`— and want them to interact. How can `app.js` execute code or use functions from `xyz.js`?
+You have two files, `app.js` and `xyz.js`, and want them to interact. How can `app.js` execute code or use functions from `xyz.js`?
 
 ### :material-lightbulb-on: Solution
 Use `require()` to load one module into another and `module.exports` to expose functionality.
@@ -175,7 +175,7 @@ console.log(E);      // 2.718
 | Feature                | CommonJS (CJS)                   | ES Modules (ESM)               |
 |------------------------|----------------------------------|--------------------------------|
 | Loading                | Synchronous: `require()` blocks until the module is loaded | Asynchronous: `import` can load in parallel without blocking |
-| Strict Mode            | Non-strict by default            | Always strict—enforces better parsing and error handling |
+| Strict Mode            | Non-strict by default            | Always strict, which enforces better parsing and error handling |
 
 {==
 

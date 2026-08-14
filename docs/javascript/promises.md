@@ -13,7 +13,7 @@ Imagine you're building an e-commerce feature. You need to perform a sequence of
 1.  Create an order based on the items in the cart.
 2.  Proceed to payment using the Order ID obtained from step 1.
 
-Both `createOrder(cart)` and `proceedToPayment(orderId)` are asynchronous operations – they take some time to complete, and we don't know exactly how long. Crucially, `proceedToPayment` *depends* on `createOrder` finishing first.
+Both `createOrder(cart)` and `proceedToPayment(orderId)` are asynchronous operations. They take some time to complete, and we don't know exactly how long. Crucially, `proceedToPayment` *depends* on `createOrder` finishing first.
 
 ### The Old Way: Callbacks
 

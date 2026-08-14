@@ -82,7 +82,7 @@ Uncaught ReferenceError: b is not defined
 </figure>
 
 !!! info
-    This is a key reason why `let` and `const` (introduced in ES6) are generally preferred over `var` – they limit the variable's "lifespan" to the block where they are needed, reducing potential bugs.
+    This is a key reason why `let` and `const` (introduced in ES6) are generally preferred over `var`. They limit the variable's "lifespan" to the block where they are needed, reducing potential bugs.
 
 ---
 
@@ -331,4 +331,3 @@ Inside Block 1, a =  30                     shadowing-1.js:4
 Inside Block 2, a =  30                     shadowing-1.js:7
 Outside Block, a =  20                      shadowing-1.js:10
 ```
-

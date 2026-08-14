@@ -4,7 +4,7 @@ icon: material/arrow-right
 
 # `call`, `apply`, and `bind`
 
-Have you ever needed to share a function between different objects, but found that `this` didn't refer to the object you expected? JavaScript provides powerful tools—`call`, `apply`, and `bind`—to explicitly control the `this` context when invoking functions. Let's see how you can use them to solve this common problem.
+Have you ever needed to share a function between different objects, but found that `this` didn't refer to the object you expected? JavaScript provides three powerful tools, `call`, `apply`, and `bind`, to explicitly control the `this` context when invoking functions. Let's see how you can use them to solve this common problem.
 
 ---
 

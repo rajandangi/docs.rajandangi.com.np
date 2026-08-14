@@ -18,7 +18,7 @@ Sometimes, you want to use modern JavaScript features, but not all environments 
 
 **Polyfill:** A piece of code that adds missing functionality by emulating features that don't exist in certain JavaScript environments.
 
-By writing a polyfill, you can make sure your code works everywhere—even where built-in functionality is missing.
+By writing a polyfill, you can make sure your code works everywhere, even where built-in functionality is missing.
 
 ---
 

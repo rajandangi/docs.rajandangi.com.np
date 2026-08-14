@@ -15,7 +15,7 @@ categories:
 
 ## :lock: The Protected PDF Problem: Why Google Makes It Difficult
 
-We've all been there – you find the perfect resource, but it's locked behind Google Drive's "view only" restriction. While Google implements these protections for valid copyright reasons, there are legitimate scenarios where downloading is necessary:
+We've all been there. You find the perfect resource, but it's locked behind Google Drive's "view only" restriction. While Google implements these protections for valid copyright reasons, there are legitimate scenarios where downloading is necessary:
 
 - Accessing academic materials you need offline
 - Saving conference materials for later reference

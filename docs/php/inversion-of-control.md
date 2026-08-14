@@ -2,7 +2,7 @@
 icon: material/arrow-right
 ---
 
-In our previous section, we discussed Dependency Injection (DI) – the practice of giving an object its dependencies from the outside instead of letting it create them internally. This is a great first step towards cleaner code.
+In our previous section, we discussed Dependency Injection (DI), the practice of giving an object its dependencies from the outside instead of letting it create them internally. This is a great first step towards cleaner code.
 
 However, look at this DI example again:
 
@@ -169,7 +169,7 @@ $gatewayUsingStripe->cancelUserSubscription();
 ```
 
 !!! tip "This Shift is Inversion of Control!"
-    The responsibility for deciding *which* `PaymentContract` implementation to use has been **inverted** – moved from *inside* `PaymentGateWay` to the *outside* setup code.
+    The responsibility for deciding *which* `PaymentContract` implementation to use has been **inverted**. It moved from *inside* `PaymentGateWay` to the *outside* setup code.
 
 **Think of it like plugging in appliances:**
 
@@ -185,7 +185,7 @@ Using DI and IoC (often together via interfaces) brings significant advantages:
 1.  **Loose Coupling:** Classes depend on abstract contracts (interfaces), not concrete implementations. This makes the system incredibly flexible.
 2.  **Easy Swapping & Maintenance:** Changing payment providers (or database handlers, loggers, etc.) is trivial. You only modify the setup code where objects are created and injected. The core classes like `PaymentGateWay` remain untouched!
 3.  **Massively Improved Testability:** This is huge! You can easily test `PaymentGateWay` in complete isolation. Just create a simple "MockPayment" class that implements `PaymentContract` but doesn't do anything real (maybe just records if methods were called). Inject this mock during your tests. No real network calls, no real charges!
-4.  **Better Reusability:** Components designed around interfaces are like building blocks – much easier to reuse in different parts of your application or other projects because they aren't hard-wired to specific dependencies.
+4.  **Better Reusability:** Components designed around interfaces are like building blocks. They are much easier to reuse in different parts of your application or other projects because they aren't hard-wired to specific dependencies.
 5.  **Clear Dependencies:** The constructor explicitly declares the *types* of services (interfaces) a class needs, making its requirements obvious and the code easier to understand, directly addressing the "Hidden Dependencies" problem.
 
 ---
@@ -248,4 +248,4 @@ The `PaymentGateWay` constructor is the hiring manager:
 
 When you pass the `ChargeBee` object (`$chargebeeService`), the hiring manager sees that `ChargeBee` meets the requirements (because it implements the interface), so it accepts it. It doesn't care that the worker's specific name is `ChargeBee`, only that it fulfills the `PaymentContract` role.
 
-This is the power of programming to interfaces – it allows for **polymorphism** (treating objects of different classes in a uniform way based on the interface) and **loose coupling**, enabling you to swap implementations easily.
+This is the power of programming to interfaces. It allows for **polymorphism** (treating objects of different classes in a uniform way based on the interface) and **loose coupling**, enabling you to swap implementations easily.

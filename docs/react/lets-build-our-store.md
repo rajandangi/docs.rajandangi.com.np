@@ -177,18 +177,18 @@ export default cartSlice.reducer;
 
 The `createSlice` function from `@reduxjs/toolkit` creates a slice of the Redux state with a specific configuration:
 
-- **name:** `'cart'` – This names the slice, useful for debugging and action types.
-- **initialState:** `{ items: [] }` – Sets the initial state with an empty `items` array.
+- **name:** `'cart'`: This names the slice, useful for debugging and action types.
+- **initialState:** `{ items: [] }`: Sets the initial state with an empty `items` array.
 - **reducers:** Contains all the reducer functions for this slice.
 
 **Reducers:**
 
-- **addItem:** `(state, action)` – Defines how to add an item to the cart. It takes the current state and an action as parameters and adds the new item (from `action.payload`) to the `items` array.
+- **addItem:** `(state, action)`: Defines how to add an item to the cart. It takes the current state and an action as parameters and adds the new item (from `action.payload`) to the `items` array.
 
 **Exporting:**
 
-- `export const { addItem } = cartSlice.actions;` – Exports the `addItem` action creator so other parts of the application can dispatch this action.
-- `export default cartSlice.reducer;` – Exports the reducer function to be used in the Redux store configuration.
+- `export const { addItem } = cartSlice.actions;`: Exports the `addItem` action creator so other parts of the application can dispatch this action.
+- `export default cartSlice.reducer;`: Exports the reducer function to be used in the Redux store configuration.
 
 Now your slice is ready to be added to the store.
 

@@ -40,7 +40,7 @@ A thread is the smallest unit of execution within a process that can be schedule
 
 - JavaScript is a **synchronous, single-threaded language**, meaning there is only one thread in which the JavaScript engine (such as the V8 engine) runs. Code is executed line by line within this single thread.
 
-- In other languages like C++ or Java, code can be executed across multiple threads. For example, a portion of the code might be executed in one thread, while another part runs simultaneously in a different thread. However, JavaScript executes code sequentially—one line after the other.
+- In other languages like C++ or Java, code can be executed across multiple threads. For example, a portion of the code might be executed in one thread, while another part runs simultaneously in a different thread. However, JavaScript executes code sequentially, one line after the other.
 
 - If you're executing line 2 in JavaScript, it will only run after line 1 has finished executing. This is the essence of synchronous execution: each task is performed one after the other, without overlap.
 
@@ -71,7 +71,7 @@ The JavaScript engine cannot handle asynchronous tasks alone; it needs additiona
 
 ![Node.js and libuv](./assets/nodejs-libuv.png)
 
-The JS engine gains its "superpowers" from Node.js. Node.js provides these powers through a library named [libuv](https://docs.libuv.org/en/v1.x/) — **our superhero**.
+The JS engine gains its "superpowers" from Node.js. Node.js provides these powers through a library named [libuv](https://docs.libuv.org/en/v1.x/), **our superhero**.
 
 The JS engine cannot directly access OS files, so it relies on libuv. Libuv communicates with the OS, performs the necessary tasks, and then returns the response to the JS engine. It offloads the work and handles it efficiently behind the scenes.
 

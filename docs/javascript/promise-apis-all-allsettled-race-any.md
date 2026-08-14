@@ -4,7 +4,7 @@ icon: material/arrow-right
 
 # Promise APIs
 
-Ever scrambled to manage several asynchronous tasks in JavaScript—like fetching data from different APIs all at once? JavaScript’s Promise APIs give you powerful tools to coordinate these operations, regardless of whether you’re waiting for everything, just need the first result, or want to know every outcome.
+Ever scrambled to manage several asynchronous tasks in JavaScript, such as fetching data from different APIs all at once? JavaScript’s Promise APIs give you powerful tools to coordinate these operations, regardless of whether you’re waiting for everything, just need the first result, or want to know every outcome.
 
 The four key APIs we’ll explore are:
 
@@ -95,7 +95,7 @@ What if the fastest promise *rejects*? Let's use P1 (3s, resolves), P2 (1s, *rej
 
 ## `Promise.any()`: First Success (Ignoring Failures)
 
-**Problem:** You only want the *first successful* result—even if some tasks fail. Only fail if *all* options do.
+**Problem:** You only want the *first successful* result, even if some tasks fail. Only fail if *all* options do.
 
 **Solution:** Choose `Promise.any()`.
 
