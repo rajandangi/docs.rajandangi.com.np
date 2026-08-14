@@ -157,25 +157,25 @@ setTimeout(announceCompletion, 1000);
 
 ## ⚖️ The Parentheses That Change Everything
 
-Suppose we want to autosave after one second:
+Suppose we want to display a reminder after one second:
 
 ```javascript
-function autosaveLMS() {
-  console.log('Saving now');
+function showReminder() {
+  console.log('Time for a break');
 }
 ```
 
 ### Incorrect: invoke it while registering the timer
 
 ```javascript
-setTimeout(autosaveLMS(), 1000);
+setTimeout(showReminder(), 1000);
 ```
 
-This looks close, but the parentheses tell JavaScript to run `autosaveLMS` while
+This looks close, but the parentheses tell JavaScript to run `showReminder` while
 it is preparing the arguments for `setTimeout`. The actual order is:
 
-1. Evaluate `autosaveLMS()`.
-2. `autosaveLMS` runs immediately.
+1. Evaluate `showReminder()`.
+2. `showReminder` runs immediately.
 3. Take its return value, normally `undefined`.
 4. Pass that return value to `setTimeout` instead of passing a function.
 
@@ -184,7 +184,7 @@ The timer never receives the function. It receives whatever the function returne
 ### Correct: pass the function itself
 
 ```javascript
-setTimeout(autosaveLMS, 1000);
+setTimeout(showReminder, 1000);
 ```
 
 Without parentheses, the timer receives the function itself. It can keep that
@@ -194,7 +194,7 @@ reference and invoke it after the delay.
 
 ```javascript
 setTimeout(function () {
-  autosaveLMS();
+  showReminder();
 }, 1000);
 ```
 
@@ -202,12 +202,12 @@ Or with an arrow function:
 
 ```javascript
 setTimeout(() => {
-  autosaveLMS();
+  showReminder();
 }, 1000);
 ```
 
 The wrapper is created immediately, but creating a function is not the same as
-running its body. `autosaveLMS()` sits inside that body and waits until the timer
+running its body. `showReminder()` sits inside that body and waits until the timer
 calls the wrapper.
 
 ### Why the wrapper behaves differently
@@ -215,31 +215,31 @@ calls the wrapper.
 Compare when the parentheses are evaluated:
 
 ```javascript
-setTimeout(autosaveLMS(), 1000);
+setTimeout(showReminder(), 1000);
 //         ^^^^^^^^^^^^^
 // Evaluated now as an argument to setTimeout.
 
 setTimeout(function () {
-  autosaveLMS();
+  showReminder();
   // ^^^^^^^^^^^
   // Evaluated later, inside the callback body.
 }, 1000);
 ```
 
 !!! tip "Read it out loud"
-    - `setTimeout(autosaveLMS(), 1000)` means “call `autosaveLMS` now, then pass
+    - `setTimeout(showReminder(), 1000)` means “call `showReminder` now, then pass
       its result.”
-    - `setTimeout(autosaveLMS, 1000)` means “pass `autosaveLMS` so the timer can
+    - `setTimeout(showReminder, 1000)` means “pass `showReminder` so the timer can
       call it later.”
-    - `setTimeout(() => autosaveLMS(), 1000)` means “pass a new function that
-      will call `autosaveLMS` later.”
+    - `setTimeout(() => showReminder(), 1000)` means “pass a new function that
+      will call `showReminder` later.”
 
 ## 📦 When a Wrapper Earns Its Keep
 
 Pass the original function when it already does exactly what you need:
 
 ```javascript
-setTimeout(autosaveLMS, 1000);
+setTimeout(showReminder, 1000);
 ```
 
 A wrapper becomes useful when you need to:
@@ -253,26 +253,26 @@ A wrapper becomes useful when you need to:
 ### Pass arguments later
 
 ```javascript
-function saveCourse(courseId, force) {
-  console.log({ courseId, force });
+function greetUser(name, punctuation) {
+  console.log(`Hello, ${name}${punctuation}`);
 }
 
-setTimeout(() => saveCourse(58, true), 1000);
+setTimeout(() => greetUser('Maya', '!'), 1000);
 ```
 
 This is wrong if the intention is to delay the call:
 
 ```javascript
-setTimeout(saveCourse(58, true), 1000);
+setTimeout(greetUser('Maya', '!'), 1000);
 ```
 
 ### Perform multiple operations later
 
 ```javascript
 setTimeout(() => {
-  showSavingIndicator();
-  autosaveLMS();
-  recordAnalyticsEvent();
+  showSpinner();
+  refreshDashboard();
+  hideSpinner();
 }, 1000);
 ```
 
@@ -281,7 +281,7 @@ setTimeout(() => {
 ```javascript
 setTimeout(() => {
   if (document.visibilityState === 'visible') {
-    autosaveLMS();
+    showReminder();
   }
 }, 1000);
 ```
@@ -310,13 +310,13 @@ Every callback-based API has a small contract. For example,
 `Array.prototype.map` passes the current value, index, and original array:
 
 ```javascript
-const courses = ['JavaScript', 'PHP'];
+const colours = ['Blue', 'Green'];
 
-const labels = courses.map(function (course, index) {
-  return `${index + 1}. ${course}`;
+const labels = colours.map(function (colour, index) {
+  return `${index + 1}. ${colour}`;
 });
 
-console.log(labels); // ["1. JavaScript", "2. PHP"]
+console.log(labels); // ["1. Blue", "2. Green"]
 ```
 
 Event listeners receive an event object:
@@ -523,7 +523,7 @@ button.addEventListener('click', handleSaveClick);   // Correct.
 ```
 
 The first line invokes `handleSaveClick` during setup and passes its return value
-as the listener. This is the same mistake as `setTimeout(autosaveLMS(), 1000)`.
+as the listener. This is the same mistake as `setTimeout(showReminder(), 1000)`.
 
 ### Removing a listener requires the same function reference
 
@@ -597,9 +597,9 @@ Use one when the callback is:
 - unlikely to need independent testing or reuse.
 
 ```javascript
-const completedIds = modules
-  .filter((module) => module.completed)
-  .map((module) => module.id);
+const activeUsernames = users
+  .filter((user) => user.active)
+  .map((user) => user.username);
 ```
 
 ### When a named callback is a better choice
@@ -614,17 +614,17 @@ Name it when the callback:
 - should be tested independently.
 
 ```javascript
-function isCompletedModule(module) {
-  return module.completed;
+function isActiveUser(user) {
+  return user.active;
 }
 
-function getModuleId(module) {
-  return module.id;
+function getUsername(user) {
+  return user.username;
 }
 
-const completedIds = modules
-  .filter(isCompletedModule)
-  .map(getModuleId);
+const activeUsernames = users
+  .filter(isActiveUser)
+  .map(getUsername);
 ```
 
 A name is not automatically an improvement. Use one when it helps explain intent,
@@ -637,18 +637,18 @@ create their own `this`; they borrow it from the surrounding scope. That differe
 matters as soon as an object method becomes a callback.
 
 ```javascript
-const course = {
-  title: 'JavaScript Foundations',
+const player = {
+  name: 'Maya',
 
   startWithRegularFunction() {
     setTimeout(function () {
-      console.log(this.title); // Usually undefined in this example.
+      console.log(this.name); // Usually undefined in this example.
     }, 1000);
   },
 
   startWithArrowFunction() {
     setTimeout(() => {
-      console.log(this.title); // "JavaScript Foundations"
+      console.log(this.name); // "Maya"
     }, 1000);
   },
 };
@@ -659,8 +659,8 @@ Another explicit option is `bind`:
 
 ```javascript
 setTimeout(function () {
-  console.log(this.title);
-}.bind(course), 1000);
+  console.log(this.name);
+}.bind(player), 1000);
 ```
 
 Event listeners require extra care. With a regular function, `this` is generally
@@ -680,19 +680,19 @@ A callback carries access to the scope where it was created, even when it runs
 later. That behaviour is called a [closure](closures.md).
 
 ```javascript
-function createProgressTracker(courseName) {
-  let completed = 0;
+function createCounter(label) {
+  let count = 0;
 
-  return function recordCompletion() {
-    completed += 1;
-    console.log(`${courseName}: ${completed} complete`);
+  return function increment() {
+    count += 1;
+    console.log(`${label}: ${count}`);
   };
 }
 
-const recordCompletion = createProgressTracker('JavaScript');
+const countClicks = createCounter('Clicks');
 
-recordCompletion(); // "JavaScript: 1 complete"
-recordCompletion(); // "JavaScript: 2 complete"
+countClicks(); // "Clicks: 1"
+countClicks(); // "Clicks: 2"
 ```
 
 One detail is easy to miss: a closure keeps access to a variable, not a frozen copy
@@ -730,7 +730,7 @@ the timer callback:
 ```javascript
 try {
   setTimeout(() => {
-    throw new Error('Autosave failed');
+    throw new Error('Report failed');
   }, 1000);
 } catch (error) {
   // This does not catch the later error.
@@ -744,9 +744,9 @@ inside the asynchronous boundary:
 ```javascript
 setTimeout(() => {
   try {
-    riskyAutosave();
+    generateReport();
   } catch (error) {
-    console.error('Autosave failed', error);
+    console.error('Report failed', error);
   }
 }, 1000);
 ```
@@ -832,15 +832,15 @@ inline wrapper has a new identity every time.
 ### 5. Accidentally relying on `this`
 
 ```javascript
-setTimeout(course.save, 1000);
+setTimeout(profile.save, 1000);
 ```
 
 Passing a method separately from its object can lose its intended receiver. Use a
 wrapper or bind it:
 
 ```javascript
-setTimeout(() => course.save(), 1000);
-setTimeout(course.save.bind(course), 1000);
+setTimeout(() => profile.save(), 1000);
+setTimeout(profile.save.bind(profile), 1000);
 ```
 
 ### 6. Passing extra callback arguments unintentionally
@@ -865,9 +865,9 @@ follow:
 
 ```javascript
 getUser(userId, (user) => {
-  getCourse(user.courseId, (course) => {
-    getProgress(course.id, (progress) => {
-      renderProgress(progress);
+  getOrders(user.id, (orders) => {
+    getReceipt(orders[0].id, (receipt) => {
+      renderReceipt(receipt);
     });
   });
 });
@@ -885,21 +885,21 @@ listener can retain memory and perform duplicate work long after the feature has
 gone away.
 
 ```javascript
-function mountCoursePage() {
-  const largeCourseModel = loadCourseModel();
+function mountDashboard() {
+  const largeDashboardModel = loadDashboardModel();
 
-  function handleProgressUpdate() {
-    renderCourse(largeCourseModel);
+  function handleDashboardRefresh() {
+    renderDashboard(largeDashboardModel);
   }
 
-  window.addEventListener('course-progress', handleProgressUpdate);
+  window.addEventListener('dashboard-refresh', handleDashboardRefresh);
 
-  return function unmountCoursePage() {
-    window.removeEventListener('course-progress', handleProgressUpdate);
+  return function unmountDashboard() {
+    window.removeEventListener('dashboard-refresh', handleDashboardRefresh);
   };
 }
 
-const cleanup = mountCoursePage();
+const cleanup = mountDashboard();
 
 // Later, when the feature is removed:
 cleanup();
@@ -911,7 +911,7 @@ registration.
 Timers can also be cancelled by retaining their IDs:
 
 ```javascript
-const timerId = setTimeout(autosaveLMS, 1000);
+const timerId = setTimeout(showReminder, 1000);
 
 // Cancel it if the user leaves before it runs.
 clearTimeout(timerId);
@@ -927,21 +927,21 @@ Do not make callers guess. A callback API should answer four questions:
 4. How **errors and cleanup** work.
 
 ```javascript
-function forEachCompletedModule(modules, callback) {
-  for (const module of modules) {
-    if (module.completed) {
-      callback(module.id, module);
+function forEachActiveUser(users, callback) {
+  for (const user of users) {
+    if (user.active) {
+      callback(user.id, user);
     }
   }
 }
 
-forEachCompletedModule(courseModules, (id, module) => {
-  console.log(`Completed ${id}: ${module.title}`);
+forEachActiveUser(users, (id, user) => {
+  console.log(`Active user ${id}: ${user.username}`);
 });
 ```
 
 Here the callback runs synchronously, may run more than once, and receives an ID
-plus the complete module. A reader can understand the contract without digging
+plus the complete user object. A reader can understand the contract without digging
 through the implementation.
 
 If the API performs one future operation that either succeeds or fails, returning
@@ -964,29 +964,29 @@ When a callback behaves strangely, walk through these questions in order:
 ### Add logs at registration and execution
 
 ```javascript
-console.log('Registering autosave callback');
+console.log('Setting the timer');
 
 setTimeout(() => {
-  console.log('Executing autosave callback');
-  autosaveLMS();
+  console.log('Running the timer callback');
+  showReminder();
 }, 1000);
 
-console.log('Registration complete');
+console.log('Timer configured');
 ```
 
 The output makes the hand-off visible:
 
 ```text
-Registering autosave callback
-Registration complete
-Executing autosave callback
+Setting the timer
+Timer configured
+Running the timer callback
 ```
 
 ### Prefer names for important callbacks
 
 ```javascript
-setTimeout(function autosaveAfterIdlePeriod() {
-  autosaveLMS();
+setTimeout(function showScheduledReminder() {
+  showReminder();
 }, 1000);
 ```
 
@@ -998,12 +998,12 @@ Move substantial logic into a named function, test that function directly, and
 keep the scheduling layer small:
 
 ```javascript
-function buildProgressMessage(completed, total) {
-  return `${completed} of ${total} modules complete`;
+function buildStatusMessage(processed, total) {
+  return `${processed} of ${total} items processed`;
 }
 
 setTimeout(() => {
-  statusElement.textContent = buildProgressMessage(3, 5);
+  statusElement.textContent = buildStatusMessage(3, 5);
 }, 1000);
 ```
 
